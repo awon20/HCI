@@ -1,0 +1,41 @@
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="150"
+        height="250"
+        viewBox="0 0 193.5 223.565"
+      >
+        <g transform="translate(1 0.5)">
+          <path
+            d="M98.737,13.375a4.744,4.744,0,0,1,0,6.311l-8.591,9.332L73.673,11.14l8.591-9.332a3.894,3.894,0,0,1,5.823,0l10.65,11.558ZM84.323,35.329,67.849,17.451,11.732,78.361a4.546,4.546,0,0,0-1,1.752L4.105,101.692a2.372,2.372,0,0,0,.5,2.284,1.947,1.947,0,0,0,2.1.541l19.884-7.2a4.078,4.078,0,0,0,1.614-1.073l56.117-60.91Z"
+            transform="translate(92.061 -0.5)"
+            fill="#fff"
+            stroke="#fff"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1"
+          />
+          <path
+            d="M1,129.454c0,8.513,7.812,15.414,17.449,15.414H146.405c9.637,0,17.449-6.9,17.449-15.414V67.8c0-2.838-2.6-5.138-5.816-5.138s-5.816,2.3-5.816,5.138v61.658c0,2.838-2.6,5.138-5.816,5.138H18.449c-3.212,0-5.816-2.3-5.816-5.138V16.414c0-2.838,2.6-5.138,5.816-5.138H94.059c3.212,0,5.816-2.3,5.816-5.138S97.271,1,94.059,1H18.449C8.812,1,1,7.9,1,16.414Z"
+            transform="translate(-1 31.197)"
+            fill="#fff"
+            stroke="#fff"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1"
+            fill-rule="evenodd"
+          />
+          <text
+            transform="translate(0 212.065)"
+            fill="#fff"
+            stroke="#fff"
+            stroke-width="1"
+            font-size="34"
+            font-family="OpenSans, Open Sans"
+            letter-spacing="0em"
+          >
+            <tspan x="0" y="0">
+              SketchBox
+            </tspan>
+          </text>
+        </g>
+      </svg>

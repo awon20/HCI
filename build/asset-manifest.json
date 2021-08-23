@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/sketchbox-pages/static/css/main.ba5bd903.chunk.css",
+    "main.js": "/sketchbox-pages/static/js/main.b1195a00.chunk.js",
+    "main.js.map": "/sketchbox-pages/static/js/main.b1195a00.chunk.js.map",
+    "runtime-main.js": "/sketchbox-pages/static/js/runtime-main.aba8b729.js",
+    "runtime-main.js.map": "/sketchbox-pages/static/js/runtime-main.aba8b729.js.map",
+    "static/js/2.a0581dc2.chunk.js": "/sketchbox-pages/static/js/2.a0581dc2.chunk.js",
+    "static/js/2.a0581dc2.chunk.js.map": "/sketchbox-pages/static/js/2.a0581dc2.chunk.js.map",
+    "index.html": "/sketchbox-pages/index.html",
+    "static/css/main.ba5bd903.chunk.css.map": "/sketchbox-pages/static/css/main.ba5bd903.chunk.css.map",
+    "static/js/2.a0581dc2.chunk.js.LICENSE.txt": "/sketchbox-pages/static/js/2.a0581dc2.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.aba8b729.js",
+    "static/js/2.a0581dc2.chunk.js",
+    "static/css/main.ba5bd903.chunk.css",
+    "static/js/main.b1195a00.chunk.js"
+  ]
+}
