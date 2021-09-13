@@ -113,7 +113,7 @@ export function RecordingButton() {
           loop
         />
       </Box>
-      <Grid item xs={12}>
+      {/* <Grid item xs={12}>
         <ButtonGroup
           variant="contained"
           ref={anchorRef}
@@ -178,7 +178,7 @@ export function RecordingButton() {
             </Grow>
           )}
         </Popper>
-      </Grid>
+      </Grid> */}
     </Grid>
   );
 }
