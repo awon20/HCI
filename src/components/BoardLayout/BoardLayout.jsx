@@ -107,10 +107,10 @@ export function BoardLayout() {
           <StopRecordBoardButton />
         </div>
 
-        <div className={classes.styledComponents}>
+        {/* <div className={classes.styledComponents}> */}
           {/* RecordView for Video from components VideoRecorderComponent  */}
-          <RecordingAPI></RecordingAPI>
-        </div>
+          {/* <RecordingAPI></RecordingAPI> */}
+        {/* </div> */}
       </MUIDrawer>
 
       {/** Drawing Area */}
