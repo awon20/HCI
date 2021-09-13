@@ -1,8 +1,18 @@
 import React from "react";
 import {  
   Box,
+  Button,
   Grid,
 } from "@material-ui/core";
+
+import {
+  StartRecordBoardButton,
+  StopRecordBoardButton,
+  CameraMicroBox,
+  ToolsBox,
+  RecordingButton,
+
+} from "../../components";
 /**
  * Checks whether the argument is an object
  * @param {any} 
@@ -372,10 +382,10 @@ export function RecordingAPI() {
       <Box display="flex" justifyContent="center">
         {/* <h1>Video recorder</h1>
         {status} */}
-        <dialog open={status === "acquiring_media"}>
+        {/* <dialog open={status === "acquiring_media"}>
           Waiting for permissions
-        </dialog>
-        <div>
+        </dialog> */}
+        <Button>
           Select video source
           <label>
             <input
@@ -393,8 +403,8 @@ export function RecordingAPI() {
             />{" "}
             Camera
           </label>
-        </div>
-        <div>
+        </Button>
+        <Button>
           <label>
             Enable microphone
             <input
@@ -403,10 +413,10 @@ export function RecordingAPI() {
               onChange={() => setAudio((prevState) => !prevState)}
             />
           </label>
-        </div>
+        </Button>
         <section>
           {status !== "recording" && (
-            <button
+            <Button
               type="button"
               onClick={async () => {
                 await getMediaStream();
@@ -414,7 +424,7 @@ export function RecordingAPI() {
               }}
             >
               Start recording
-            </button>
+            </Button>
           )}
           {status === "recording" && (
             <button type="button" onClick={pauseRecording}>
