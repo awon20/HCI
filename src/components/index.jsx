@@ -19,4 +19,4 @@ export { ToolsBox } from "./ToolsBox/ToolsBox";
 export { RecordingButton } from "./VideoRecorderComponent/RecordingButton";
 export { RecordingAPI } from "./VideoRecorderComponent/RecordingAPI";
 export { BoardButton } from "./BoardButtonStyles/BoardButtonStyles";
-// export { PlayerControlExample } from "./VideoRecorderComponent/PlayerControlExample";
+export { PickingColors } from "./PickingColors/PickingColors";
