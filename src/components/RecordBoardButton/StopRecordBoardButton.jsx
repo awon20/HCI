@@ -1,5 +1,6 @@
 import React from 'react'
-import { BoardButton } from "./StartRecordBoardButton";
+// import { BoardButton } from "./StartRecordBoardButton";
+import { BoardButton } from "../../components";
 import { makeStyles } from "@material-ui/core/styles";
 import { Box } from '@material-ui/core';
 
