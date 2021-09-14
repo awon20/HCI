@@ -1,44 +1,11 @@
 import React from 'react';
-import Button from "@material-ui/core/Button";
-import {
-  withStyles,
-  // makeStyles,
-} from "@material-ui/core/styles";
-import { Box } from '@material-ui/core';
 
+import { Box } from '@material-ui/core';
+import { RecordingAPI } from "../../components/";
 
 const buttonName = "Board Aufzeichnen";
 
-export const BoardButton = withStyles({
-  root: {
-    boxShadow: "none",
-    textTransform: "none",
-    fontSize: 24,
-    padding: "6px 16px",
-    border: "1px solid",
-    lineHeight: 1.5,
-    backgroundColor: "#aad1c6",
-    borderColor: "#aad1c6",
-    fontFamily: [
-      "-apple-system",
-      "BlinkMacSystemFont",
-      '"Segoe UI"',
-      "Roboto",
-      '"Helvetica Neue"',
-      "Arial",
-      "sans-serif",
-      '"Apple Color Emoji"',
-      '"Segoe UI Emoji"',
-      '"Segoe UI Symbol"',
-    ].join(","),
-    "&:hover": {
-      backgroundColor: "#95C6B8",
-      borderColor: "#95C6B8",
-      boxShadow: "none",
-    },
 
-  },
-})(Button);
 
 // const useStyles = makeStyles((theme) => ({
 //   margin: {
@@ -48,20 +15,24 @@ export const BoardButton = withStyles({
 //   },
 // }));
 
-
-export function StartRecordBoardButton() {
-  // const classes = useStyles();
+export function StartRecordBoardButton(props) {
   return (
-    <Box display="flex" justifyContent="center">
-      {/* start Board recording */}
-      <BoardButton
-        variant="contained"
-        color="primary"
-        disableRipple
-        // className={classes.margin}
-      >
+    <div>
+      <Box display="flex" justifyContent="center">
+        {/* start Board recording */}
+        {/* <BoardButton
+          variant="contained"
+          color="primary"
+          disableRipple
+          // getMediaStream={this.getMediaStream}
+          // className={classes.margin}
+        ></BoardButton> */}
+      </Box>
+      <div>
+        <RecordingAPI>
         {buttonName}
-      </BoardButton>
-    </Box>
+        </RecordingAPI>
+      </div>
+    </div>
   );
 }
