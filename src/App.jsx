@@ -36,7 +36,7 @@ function App() {
       <ThemeProvider theme={PickingColors}>
         <CssBaseline />
         <Switch>
-          <Route exact path="/">
+          <Route exact path="/sketchbox-pages">
             <WelcomePage onClick={() => setIsLoading(true)} />
           </Route>
           <Route exact path="/loading">
