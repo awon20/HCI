@@ -1,7 +1,0 @@
-.grid {
-  display: grid;
-  grid-template-columns: repeat(5, 8rem);
-  grid-auto-rows: 8rem;
-  justify-items: center;
-  align-items: center;
-}
