@@ -20,3 +20,6 @@ export { RecordingButton } from "./VideoRecorderComponent/RecordingButton";
 export { RecordingAPI } from "./VideoRecorderComponent/RecordingAPI";
 export { BoardButton } from "./BoardButtonStyles/BoardButtonStyles";
 export { PickingColors } from "./PickingColors/PickingColors";
+export {
+  StyledSwitchButton} from "./StyledSwitchButtons/StyledSwitchButtons";
+export { ToggleSwitchCamera } from "./ToggleSwitchCamera/ToggleSwitchCamera";
