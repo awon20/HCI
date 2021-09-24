@@ -2,7 +2,7 @@ import React from "react";
 import { withStyles, ThemeProvider } from "@material-ui/core/styles";
 import { Switch, Grid } from "@material-ui/core";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import { PickingColors } from "../../components";
+import { ThemePaletteColors } from "../../components";
 
 const GreenSwitch = withStyles((theme) => ({
   root: {
@@ -39,7 +39,7 @@ const GreenSwitch = withStyles((theme) => ({
 }))(Switch);
 
 
-export function ToggleSwitchCamera(props) {
+export function ToggleSwitchCamera() {
   const [state, setState] = React.useState({
     checkedA: true,
   });
@@ -47,37 +47,67 @@ export function ToggleSwitchCamera(props) {
   const handleChange = (event) => {
     setState({ ...state, [event.target.name]: event.target.checked });
   };
-  if (state.checkedA){
-       return (
-         <ThemeProvider theme={PickingColors}>
-           <CssBaseline />
-           <Grid component="label" container alignItems="center" spacing={1}>
-             <Grid item>
-               <GreenSwitch
-                 //   checked={state.checkedA}
+  return ( 
+    <div>
+      { state === 'checkedA' ? 
+      <ThemeProvider theme={ThemePaletteColors}>
+            <CssBaseline />
+            <Grid component="label" container alignItems="center" spacing={1}>
+              <Grid item>
+                <GreenSwitch
                  onChange={handleChange}
                  name="checkedA"
                />
              </Grid>
            </Grid>
-         </ThemeProvider>
-       );
-  }else {
-          return (
-            <ThemeProvider theme={PickingColors}>
-              <CssBaseline />
-              <Grid component="label" container alignItems="center" spacing={1}>
-                <Grid item>
-                  <GreenSwitch
-                    //   checked={state.checkedA}
-                    onChange={handleChange}
-                    name="checkedA"
-                  />
-                </Grid>
-              </Grid>
-            </ThemeProvider>
-          );
-  }
+         </ThemeProvider> 
+         : 
+        <ThemeProvider theme={ThemePaletteColors}>
+        <CssBaseline />
+        <Grid component="label" container alignItems="center" spacing={1}>
+          <Grid item>
+            <GreenSwitch
+              //   checked={state.checkedA}
+              onChange={handleChange}
+              name="checkedA"
+            />
+          </Grid>
+        </Grid>
+      </ThemeProvider>
+        }
+      </div>
+  );
+  // if (state.checkedA){
+  //      return (
+  //        <ThemeProvider theme={ThemePaletteColors}>
+  //          <CssBaseline />
+  //          <Grid component="label" container alignItems="center" spacing={1}>
+  //            <Grid item>
+  //              <GreenSwitch
+  //                //   checked={state.checkedA}
+  //                onChange={handleChange}
+  //                name="checkedA"
+  //              />
+  //            </Grid>
+  //          </Grid>
+  //        </ThemeProvider>
+  //      );
+  // }else {
+  //         return (
+  //           <ThemeProvider theme={ThemePaletteColors}>
+  //             <CssBaseline />
+  //             <Grid component="label" container alignItems="center" spacing={1}>
+  //               <Grid item>
+  //                 <GreenSwitch
+  //                   //   checked={state.checkedA}
+  //                   onChange={handleChange}
+  //                   name="checkedA"
+  //                 />
+  //               </Grid>
+  //             </Grid>
+  //           </ThemeProvider>
+  //         );
+  // }
  
 }
 
