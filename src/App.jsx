@@ -1,19 +1,22 @@
 // import { BrowserRouter as Router, Route } from "react-router-dom";
 import { Switch, Route } from "react-router-dom";
-import { ThemeProvider } from "@material-ui/core/styles";
-import CssBaseline from "@material-ui/core/CssBaseline"; //  CssBaseline component to kickstart an elegant, consistent, and simple baseline to build upon
+// import { ThemeProvider } from "@material-ui/core/styles";
+// import CssBaseline from "@material-ui/core/CssBaseline"; //  CssBaseline component to kickstart an elegant, consistent, and simple baseline to build upon
 
 import { useState, useEffect } from "react";
 
 import "./App.css";
 import {
   BoardLoading,
-  NewSketchBoard,
+  CreateSketchBoard,
   WelcomePage,
   SketchBoardCamOn,
+  SketchBoardMicOn,
+  SketchBoardCamOffMicOff,
   MiniDrawer,
+  SketchBoardSummary
 } from "./pages";
-import { PickingColors} from "./components";
+// import { ThemePaletteColors } from "./components";
 import { LoadingSpinner } from "./pages/LoadingSpinner/LoadingSpinner";
 
 
@@ -33,8 +36,9 @@ function App() {
       );
     }
     return (
-      <ThemeProvider theme={PickingColors}>
-        <CssBaseline />
+      <div>
+        {/* <ThemeProvider> */}
+        {/* <CssBaseline /> */}
         <Switch>
           <Route exact path="/sketchbox-pages">
             <WelcomePage onClick={() => setIsLoading(true)} />
@@ -46,16 +50,25 @@ function App() {
             <BoardLoading />
           </Route>
           <Route path="/new-sketchboard">
-            <NewSketchBoard />
+            <CreateSketchBoard />
           </Route>
           <Route path="/sketchboard-cam-on">
             <SketchBoardCamOn />
           </Route>
+          <Route path="/sketchboard-mic-on">
+            <SketchBoardMicOn />
+          </Route>
+          <Route path="/sketchboard-cam-off-mic-off">
+            <SketchBoardCamOffMicOff />
+          </Route>
+          <Route path="/sketchboard-summary"></Route>
+            <SketchBoardSummary />
           <Route path="/minidrawer">
             <MiniDrawer />
           </Route>
         </Switch>
-      </ThemeProvider>
+        {/* </ThemeProvider> */}
+      </div>
     );
 }
 
