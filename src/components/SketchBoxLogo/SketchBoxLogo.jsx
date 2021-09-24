@@ -3,7 +3,7 @@ import React from "react";
 export function SvgSketchBoxLogo(props) {
   return (
     <svg
-      xmlns="http://www.w3.org/2000/svg"
+      xmlns="http://wWww.w3.org/2000/svg"
       width="20em"
       height="20em"
       viewBox="0 0 193.5 223.565"
@@ -24,7 +24,7 @@ export function SvgSketchBoxLogo(props) {
         <text
           transform="translate(1 212.565)"
           fontSize={34}
-          fontFamily="OpenSans, Open Sans"
+          fontFamily="Roboto"
           letterSpacing="0em"
         >
           <tspan x={0} y={0}>
