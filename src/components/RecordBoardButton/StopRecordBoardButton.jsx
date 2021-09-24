@@ -1,13 +1,27 @@
 import React from 'react'
-// import { BoardButton } from "./StartRecordBoardButton";
-import { BoardButton } from "../../components";
+import { BoardButton } from "./StartRecordBoardButton";
 import { makeStyles } from "@material-ui/core/styles";
 import { Box } from '@material-ui/core';
+import Typography from '@material-ui/core/Typography';
 
 
 
-const buttonName = "Board Abschliessen";
-
+// const useStyles = makeStyles((theme) => ({
+//   root: {
+//     // margin: theme.spacing(10),
+//     mainColor: theme.palette.secondary.main,
+//     backgroundColor: theme.palette.secondary.dark,
+//     borderColor: theme.palette.secondary.dark,
+//     // position: "relative",
+//     // bottom: 50,
+//     center: 0,
+//     "&:hover": {
+//       backgroundColor: theme.palette.secondary.dark,
+//       borderColor: theme.palette.secondary.dark,
+//       boxShadow: "none",
+//     },
+//   },
+// }));
 const useStyles = makeStyles((theme) => ({
   root: {
     // margin: theme.spacing(10),
@@ -37,7 +51,14 @@ export function StopRecordBoardButton(props) {
           className={classes.root}
           {...props.position}
         >
-          {buttonName}
+          <Typography
+            variant="button"
+            component="h2"
+            align="center"
+            display="block"
+          >
+            Board Abschliessen
+          </Typography>
         </BoardButton>
       </Box>
     );
