@@ -1,6 +1,6 @@
 import { Button, Container, Typography } from '@material-ui/core';
 import CssBaseline from "@material-ui/core/CssBaseline";
-import React, {useState, useEffect} from 'react';
+import React, {useEffect} from 'react';
 import { makeStyles } from "@material-ui/core/styles";
 
 
@@ -24,9 +24,9 @@ const useStyles = makeStyles({
 
 export function LoadingPage() {
     const classes = useStyles();
-    const [cat, setCat] = useState();
-    const [loading, setLoading] = useState(false);
-    const [ done, setDone] = useState(false);
+    // const [cat, setCat] = useState();
+    // const [loading, setLoading] = useState(false);
+    // const [ done, setDone] = useState(false);
 
     useEffect(() => {
         getCatPic();
@@ -34,14 +34,14 @@ export function LoadingPage() {
 
 
     const getCatPic = () =>{
-        setLoading(false);
-        setDone(false);
+        // setLoading(false);
+        // setDone(false);
         setTimeout(() => {
             fetch("https://aws.random.cat/meow")
             .then(res => res.json())
-            .then(data => {
-                setCat(data.file);
-        })
+        //     .then(data => {
+        //         setCat(data.file);
+        // })
         .catch(err => console.log(err));
         }, 1200);
     }
