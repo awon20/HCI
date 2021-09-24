@@ -1,9 +1,14 @@
 import React from 'react'
-import ToggleOnIcon from "@material-ui/icons/ToggleOn";
-import IconButton from "@material-ui/core/IconButton";
+import { makeStyles, ThemeProvider } from "@material-ui/core/styles";
+import {
+  IconButton,
+  CssBaseline,
+  FormControlLabel,
+  FormGroup,
+} from "@material-ui/core";
 import MicNoneOutlinedIcon from "@material-ui/icons/MicNoneOutlined";
-import { makeStyles } from "@material-ui/core/styles";
-
+// import MicOffOutlinedIcon from "@material-ui/icons/MicOffOutlined";
+import { ThemePaletteColors, StyledSwitchButton } from "../../components/";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -28,26 +33,49 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export function MicroLoader() {
+    const [state, setState] = React.useState({
+      checkedB: true,
+    });
+
+    const handleChange = (event) => {
+      setState({ ...state, [event.target.name]: event.target.checked });
+    };
     const classes = useStyles();
-    return (
-      <div>
-        {" "}
-        <IconButton
-          aria-label="micro on/off"
-          tooltip="status of the micro"
-          variant="raised"
-          style={{ backgroundColor: "transparent" }}
-        >
-          <MicNoneOutlinedIcon className={classes.micro} />
-        </IconButton>
-        <IconButton
-          aria-label="micro on/off"
-          tooltip="Change the status of the micro"
-          variant="raised"
-          style={{ backgroundColor: "transparent" }}
-        >
-          <ToggleOnIcon className={classes.toggle} />
-        </IconButton>
-      </div>
-    );
+      return (
+        <div>
+          <FormGroup row>
+            <FormControlLabel
+              disabled
+              control={
+                <IconButton
+                  aria-label="micro on/off"
+                  tooltip="status of the micro"
+                  variant="raised"
+                  style={{ backgroundColor: "transparent" }}
+                >
+                  <MicNoneOutlinedIcon className={classes.micro} />
+                  {/* <MicOffOutlinedIcon className={classes.micro} /> */}
+                </IconButton>
+              }
+            />
+
+            <FormControlLabel
+              aria-label="micro on/off"
+              tooltip="Change the status of the micro"
+              variant="raised"
+              control={
+                <ThemeProvider theme={ThemePaletteColors}>
+                  <CssBaseline />
+                  <StyledSwitchButton
+                    checked={state.checkedB}
+                    onChange={handleChange}
+                    name="checkedB"
+                    color="primary"
+                  />
+                </ThemeProvider>
+              }
+            />
+          </FormGroup>
+        </div>
+      );
 }
