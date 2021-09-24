@@ -1,21 +1,13 @@
 import React from "react";
-// import clsx from "clsx";
+import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
+import { Paper, Box } from "@material-ui/core";
 import {
   Drawer as MUIDrawer,
-  // Box,
-  // List,
-  // ListItem,
-  // ListItemText,
-  // ListItemIcon,
-  CssBaseline,
 } from "@material-ui/core/";
-// import { InboxIcon, OutboxIcon, MailIcon } from "@material-ui/icons";
-// import InboxIcon from "@material-ui/icons/MoveToInbox";
-// import MailIcon from "@material-ui/icons/Mail";
-// import OutboxIcon from "@material-ui/icons/outbox";
 
-// import UndoIcon from "@material-ui/icons/Undo";
+import { useHistory } from "react-router";
+
 import {
   StartRecordBoardButton,
   StopRecordBoardButton,
@@ -23,102 +15,131 @@ import {
   ToolsBox,
   PenDrawing,
   RecordingButton,
-  // RecordingAPI,
-  // PlayerControlExample,
 } from "../../components";
 
+// import {  SketchBoardSummary } from "../../pages"
 
+const drawerWidth = 650;
 
-const drawerWidth = "700px";
+// const pagesTransition = [
+//   {
+//     page: <SketchBoardSummary />,
+//     path: "sketchboard-summary",
+//   },
+//   // {
+//   //   page: <BoardClosingDialog />,
+//   //   path: "/sketchbox-pages",
+//   // },
+// ];
+
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
   },
+
   drawer: {
     width: drawerWidth,
     flexShrink: 0,
     whiteSpace: "nowrap",
   },
+
   drawerPaper: {
     width: drawerWidth,
   },
+
   BtnStartSketchRec: {
-    // marginTop: "100px",
-    // marginBottom: "100px",
-    // padding: theme.spacing(1),
     margin: theme.spacing(10, "auto"),
-  },
-  BtnStopSketchRec: {
-    // marginTop: "100px",
-    // marginBottom: "100px",
-    // padding: theme.spacing(1),
-    margin: theme.spacing(10, "auto"),
-  },
-  content: {
-    flexGrow: 1,
   },
   styledComponents: {
-    margin: theme.spacing(5),
+    margin: theme.spacing(5, 'auto'),
+  },
+  contentAlign: {
+    margin: theme.spacing(5, "auto"),
+  },
+  BtnStopSketchRec: {
+    margin: theme.spacing(10, "auto"),
   },
 }));
 export function BoardLayout() {
+// eslint-disable-next-line no-lone-blocks
+{
+  /* Hook functions */
+}
   const classes = useStyles();
-  // const itemsList = [
-  //   { text: "Home", icon: <InboxIcon /> },
-  //   { text: "About", icon: <MailIcon />},
-  //   { text: "Contact", icon: <MailIcon />},
+  const history = useHistory();
 
-  // ];
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    history.push("sketchboard-summary");
+  };
+
   return (
     <div className={classes.root}>
-      <CssBaseline />
-      {/* App Switch Button come here */}
-
-      {/* App Drawer */}
       <MUIDrawer
         className={classes.drawer}
         variant="permanent"
         anchor="left"
-        elevation="20"
+        classes={{ paper: classes.drawerPaper }}
+        // variant="persistent"
       >
         {/* Control SideBar Button */}
-        <div className={classes.styledComponents}>
-          {/* SketchBoard Start recording from components RecordBoardButton */}
-          <StartRecordBoardButton />
-        </div>
-
-        <div className={classes.styledComponents}>
-          {/* RecordView for Video from components VideoRecorderComponent  */}
-          <RecordingButton />
-        </div>
-
-        <div className={classes.styledComponents}>
-          {/* Camera and Micro from components CameraMicroBox*/}
-          <CameraMicroBox />
+        <div>
+          <Box
+            className={clsx(
+              classes.styledComponents,
+              classes.BtnStartSketchRec
+            )}
+          >
+            {/* SketchBoard Start recording from components RecordBoardButton */}
+            <StartRecordBoardButton />
+          </Box>
         </div>
 
         <div>
-          {/* Utils Lists from components ToolsBox */}
-          <ToolsBox />
+          <Box className={clsx(classes.styledComponents, classes.contentAlign)}>
+            {/* RecordView for Video from components VideoRecorderComponent  */}
+            <RecordingButton />
+          </Box>
         </div>
 
-        <div className={classes.styledComponents}>
-          {/* SketchBoard Stop recording from components RecordBoardButton */}
-          <StopRecordBoardButton />
+        <div>
+          <Box className={clsx(classes.styledComponents, classes.contentAlign)}>
+            <Paper elevation={1}>
+              {/* Camera and Micro from components CameraMicroBox*/}
+              <CameraMicroBox />
+            </Paper>
+          </Box>
         </div>
 
-        {/* <div className={classes.styledComponents}> */}
-          {/* RecordView for Video from components VideoRecorderComponent  */}
-          {/* <RecordingAPI></RecordingAPI> */}
-        {/* </div> */}
+        <div>
+          <Box className={clsx(classes.styledComponents, classes.contentAlign)}>
+            <Paper elevation={1}>
+              {/* Utils Lists from components ToolsBox */}
+              <ToolsBox />
+            </Paper>
+          </Box>
+        </div>
+
+        <div>
+          <Box
+            className={clsx(classes.styledComponents, classes.BtnStopSketchRec)}
+          >
+            {/* SketchBoard Stop recording from components RecordBoardButton */}
+           
+              <StopRecordBoardButton
+            
+                onClick={handleClick}
+              ></StopRecordBoardButton>
+            
+          </Box>
+        </div>
       </MUIDrawer>
 
       {/** Drawing Area */}
-      <main className={classes.content}>
-        <div>
-          <PenDrawing />
-        </div>
-      </main>
+      <div className={classes.content}>
+        <PenDrawing />
+      </div>
       {/* <div className={classes.page}>{children}</div> */}
     </div>
   );
