@@ -1,22 +1,14 @@
 import React from "react";
 import {  
   Box,
-  Button,
   Grid,
 } from "@material-ui/core";
+import { BoardButton } from "../../components";
 
-import {
-  StartRecordBoardButton,
-  StopRecordBoardButton,
-  CameraMicroBox,
-  ToolsBox,
-  RecordingButton,
-
-} from "../../components";
 /**
  * Checks whether the argument is an object
  * @param {any} 
- * @author <a href="mailto:https://github.com/wmik/use-media-recorder"
+ * @author <a href="mailto:https://codesandbox.io/s/screen-recorder-nmmrf?file=/src/App.js>"
  */
 function isObject(o) {
   return o && !Array.isArray(o) && Object(o) === o;
@@ -356,7 +348,8 @@ function Player({ srcBlob }) {
   );
 }
 
-export function RecordingAPI() {
+export function RecordingAPI(props) {
+  console.log(props)
   let [recordScreen, setRecordScreen] = React.useState(false);
   let [audio, setAudio] = React.useState(false);
   let {
@@ -385,26 +378,33 @@ export function RecordingAPI() {
         {/* <dialog open={status === "acquiring_media"}>
           Waiting for permissions
         </dialog> */}
-        <Button>
-          Select video source
-          <label>
-            <input
-              type="radio"
-              checked={recordScreen}
-              onChange={() => setRecordScreen((prevState) => !prevState)}
-            />{" "}
-            Screen
-          </label>
-          <label>
-            <input
-              type="radio"
-              checked={!recordScreen}
-              onChange={() => setRecordScreen((prevState) => !prevState)}
-            />{" "}
-            Camera
-          </label>
-        </Button>
-        <Button>
+        <BoardButton
+          checked={recordScreen}
+          onChange={() => setRecordScreen((prevState) => !prevState)}
+          variant="contained"
+          color="primary"
+          disableRipple
+        >
+          Board Aufzeichnen
+        </BoardButton>
+        <label>
+          <input
+            type="radio"
+            checked={recordScreen}
+            onChange={() => setRecordScreen((prevState) => !prevState)}
+          />{" "}
+          Screen
+        </label>
+        <label>
+          <input
+            type="radio"
+            checked={!recordScreen}
+            onChange={() => setRecordScreen((prevState) => !prevState)}
+          />{" "}
+          Camera
+        </label>
+
+        <BoardButton>
           <label>
             Enable microphone
             <input
@@ -413,35 +413,50 @@ export function RecordingAPI() {
               onChange={() => setAudio((prevState) => !prevState)}
             />
           </label>
-        </Button>
-        <section>
+        </BoardButton>
+        <BoardButton variant="contained" color="primary" disableRipple>
           {status !== "recording" && (
-            <Button
+            <BoardButton
               type="button"
               onClick={async () => {
                 await getMediaStream();
                 startRecording();
               }}
             >
-              Start recording
-            </Button>
+              Video Starten
+            </BoardButton>
           )}
           {status === "recording" && (
-            <button type="button" onClick={pauseRecording}>
+            <BoardButton
+              variant="contained"
+              color="primary"
+              disableRipple
+              onClick={pauseRecording}
+            >
               Pause recording
-            </button>
+            </BoardButton>
           )}
           {status === "paused" && (
-            <button type="button" onClick={resumeRecording}>
+            <BoardButton
+              variant="contained"
+              color="primary"
+              disableRipple
+              onClick={resumeRecording}
+            >
               Resume recording
-            </button>
+            </BoardButton>
           )}
           {status === "recording" && (
-            <button type="button" onClick={stopRecording}>
+            <BoardButton
+              variant="contained"
+              color="primary"
+              disableRipple
+              onClick={stopRecording}
+            >
               Stop recording
-            </button>
+            </BoardButton>
           )}
-        </section>
+        </BoardButton>
         <LiveStreamPreview stream={liveStream} />
         <Player srcBlob={mediaBlob} />
       </Box>
