@@ -1,9 +1,12 @@
 import React from 'react'
-import { makeStyles } from "@material-ui/core/styles";
-
-import ToggleOnIcon from "@material-ui/icons/ToggleOn";
-import IconButton from "@material-ui/core/IconButton";
+import { makeStyles,ThemeProvider } from "@material-ui/core/styles";
+import { IconButton, CssBaseline, FormControlLabel, FormGroup } from "@material-ui/core";
 import VideocamOutlinedIcon from "@material-ui/icons/VideocamOutlined";
+// import VideocamOffOutlinedIcon from "@material-ui/icons/VideocamOffOutlined";
+import { ThemePaletteColors, StyledSwitchButton } from "../../components/";
+
+
+
 
 const useStyles = makeStyles((theme) => ({
   controlPosition: {
@@ -14,40 +17,62 @@ const useStyles = makeStyles((theme) => ({
     paddingRight: theme.spacing(4),
     paddingBottom: theme.spacing(1),
   },
-  toggle: {
-    height: 50,
-    width: 50,
-    color: "#95C6B8",
-  },
   video: {
     height: 50,
     width: 50,
     color: "#95C6B8",
   },
+  toggle: {
+    height: 50,
+    width: 50,
+    color: "#95C6B8",
+  },
 }));
-
-
+console.trace();
 export function CameraLoader() {
-    const classes = useStyles();
-    return (
-      <div>
-        <IconButton
-          tooltip="Change the status of the camera"
-          aria-label="on/off"
-          variant="raised"
-          style={{ backgroundColor: "transparent" }}
-        >
-          <ToggleOnIcon className={classes.toggle} />
-        </IconButton>
+    const [state, setState] = React.useState({
+      checkedA: true,
+    });
 
-        <IconButton
-          aria-label="video on/off"
-          tooltip="Status of the videocam"
-          variant="raised"
-          style={{ backgroundColor: "transparent" }}
-        >
-          <VideocamOutlinedIcon className={classes.video} />
-        </IconButton>
-      </div>
-    );
-}
+    const handleChange = (event) => {
+      setState({ ...state, [event.target.name]: event.target.checked });
+    };
+    const classes = useStyles();
+          return (
+            <div>
+              <FormGroup row>
+                <FormControlLabel
+                  aria-label="micro on/off"
+                  tooltip="Change the status of the micro"
+                  variant="raised"
+                  control={
+                    <ThemeProvider theme={ThemePaletteColors}>
+                      <CssBaseline />
+                      <StyledSwitchButton
+                        checked={state.checkedA}
+                        onChange={handleChange}
+                        name="checkedA"
+                        color="primary"
+                      />
+                    </ThemeProvider>
+                  }
+                />
+                <FormControlLabel
+                  disabled
+                  control={
+                    <IconButton
+                      aria-label="micro on/off"
+                      tooltip="status of the micro"
+                      variant="raised"
+                      style={{ backgroundColor: "transparent" }}
+                    >
+                      <VideocamOutlinedIcon className={classes.video} />
+                      {/* <VideocamOffOutlinedIcon className={classes.video} /> */}
+                    </IconButton>
+                  }
+                />
+              </FormGroup>
+            </div>
+          );
+        
+     };
