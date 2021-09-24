@@ -1,7 +1,11 @@
 export { WelcomePage } from "./WelcomePage/WelcomePage";
-export { NewSketchBoard } from "./NewSketchBoard/NewSketchBoard";
+export { CreateSketchBoard } from "./CreateSketchBoard/CreateSketchBoard";
 export { BoardLoading } from "./BoardLoading/BoardLoading";
-export { SketchBoardCamOn } from "./SketchBoardPages/SketchBoardCamOn";
 export { MiniDrawer } from "./MiniDrawer/MiniDrawer";
 export { LoadingSpinner } from "./LoadingSpinner/LoadingSpinner";
+export { SketchBoardCamOn } from "./SketchBoardPages/SketchBoardCamOn";
+export { SketchBoardMicOn } from "./SketchBoardPages/SketchBoardMicOn";
+export { SketchBoardCamOffMicOff } from "./SketchBoardPages/SketchBoardCamOffMicOff";
+export { SketchBoardSummary } from "./SketchBoardSummary/SketchBoardSummary";
+export { BoardClosingDialog } from "./BoardClosingDialog/BoardClosingDialog";
 
