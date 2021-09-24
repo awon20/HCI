@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ReactLoading from "react-loading";
 
-import { NewSketchBoard } from "../../pages";
+import { CreateSketchBoard } from "../../pages";
 // import { Link } from "react-router-dom";
 import "./BoardLoading.css"
 
@@ -9,18 +9,34 @@ import "./BoardLoading.css"
 export function BoardLoading() {
   //https://www.youtube.com/watch?v=Y7pL5wG5QOg
   // https://github.com/codebucks27/React-Loading-Screen/blob/main/src/components/PreLoader1.js
-  const [data, setData] = useState([]);
+    const initialState = {
+      user: {},
+      error: null,
+    };
+  const [data, setData] = useState(initialState);
   const [done, setDone] = useState(undefined);
   // https://jsonplaceholder.typicode.com/guide/
   useEffect(() => {
+    let isSubscribed = true;
     setTimeout(() => {
       fetch("https://jsonplaceholder.typicode.com/posts")
         .then((response) => response.json())
         .then((json) => {
-          console.log(json);
+          // console.log(json);
           setData(json);
           setDone(true);
+        })
+        .catch((error) => {
+          if (isSubscribed) {
+            setData((prevState) => ({
+              ...prevState,
+              error,
+            }));
+          }
         });
+
+      // cancel subscription to useEffect
+      return () => (isSubscribed = false);
     }, 2000);
   }, []);
 
@@ -36,12 +52,12 @@ export function BoardLoading() {
           delay={300}
         />
       ) : (
-        <NewSketchBoard
+        <CreateSketchBoard
           >
             {data.map((post) => (
               <li key={post.id}>{post.title}</li>
             ))}
-        </NewSketchBoard>
+        </CreateSketchBoard>
       )}
     </div>
   );
