@@ -73,14 +73,30 @@ export function BoardCard() {
     //    setColor(event.target.checked ? greenCyan : defaultColor);
     //  };
     return (
-      <Card elevation={5} className={classes.root}>
+      <Card 
+        elevation={5} 
+        className={classes.root}>
         {/* Create Board Button */}
-        <Box display="flex" justifyContent="center" pt={4} pr={6} pb={4} pl={6}>
+        <Box
+          display="flex"
+          justifyContent="center"
+          // pt={4}
+          // pr={6}
+          // pb={4}
+          // pl={6}
+        >
           <CreateBoard onClick={() => console.log("button clicked!")} />
           {/* <SubmitButton /> */}
         </Box>
-        {/* Card name */}
-        <Box display="flex" justifyContent="center" pt={4} pr={6} pb={4} pl={6}>
+        {/* Card title */}
+        <Box
+          display="flex"
+          justifyContent="center"
+          // pt={4}
+          // pr={6}
+          // pb={4}
+          // pl={6}
+        >
           <CardTitle />
         </Box>
         {/* Camera MicrophoneComponent  */}
