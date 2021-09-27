@@ -10,11 +10,11 @@ import {
   BoardLoading,
   CreateSketchBoard,
   WelcomePage,
-  SketchBoardCamOn,
+  SketchBoardCamOnMicOn,
   SketchBoardMicOn,
   SketchBoardCamOffMicOff,
   MiniDrawer,
-  SketchBoardSummary
+  SketchBoardSummary,
 } from "./pages";
 // import { ThemePaletteColors } from "./components";
 import { LoadingSpinner } from "./pages/LoadingSpinner/LoadingSpinner";
@@ -53,7 +53,7 @@ function App() {
             <CreateSketchBoard />
           </Route>
           <Route path="/sketchboard-cam-on">
-            <SketchBoardCamOn />
+            <SketchBoardCamOnMicOn />
           </Route>
           <Route path="/sketchboard-mic-on">
             <SketchBoardMicOn />
@@ -62,7 +62,7 @@ function App() {
             <SketchBoardCamOffMicOff />
           </Route>
           <Route path="/sketchboard-summary"></Route>
-            <SketchBoardSummary />
+          <SketchBoardSummary />
           <Route path="/minidrawer">
             <MiniDrawer />
           </Route>
