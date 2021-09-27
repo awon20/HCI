@@ -9,11 +9,11 @@ const useStyles = makeStyles({
   }
 });
 
-export function SketchBoardCamOn() {
-   const classes = useStyles();
-    return (
-      <div className={classes.container}>
-          <BoardLayout />
-      </div>
-    );
+export function SketchBoardCamOnMicOn() {
+  const classes = useStyles();
+  return (
+    <div className={classes.container}>
+      <BoardLayout />
+    </div>
+  );
 }
