@@ -1,66 +1,94 @@
 import React from 'react'
-import { BoardButton } from "./StartRecordBoardButton";
-import { makeStyles } from "@material-ui/core/styles";
-import { Box } from '@material-ui/core';
+import { withStyles } from "@material-ui/core/styles";
+import { Box, Button } from "@material-ui/core";
 import Typography from '@material-ui/core/Typography';
+import Dialog from "@material-ui/core/Dialog";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import Slide from "@material-ui/core/Slide";
 
 
 
-// const useStyles = makeStyles((theme) => ({
-//   root: {
-//     // margin: theme.spacing(10),
-//     mainColor: theme.palette.secondary.main,
-//     backgroundColor: theme.palette.secondary.dark,
-//     borderColor: theme.palette.secondary.dark,
-//     // position: "relative",
-//     // bottom: 50,
-//     center: 0,
-//     "&:hover": {
-//       backgroundColor: theme.palette.secondary.dark,
-//       borderColor: theme.palette.secondary.dark,
-//       boxShadow: "none",
-//     },
-//   },
-// }));
-const useStyles = makeStyles((theme) => ({
+
+// set the transition properties
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
+
+// set the button properties
+export const BoardButton = withStyles({
   root: {
-    // margin: theme.spacing(10),
+    boxShadow: "none",
+    textTransform: "none",
+    fontSize: 24,
+    padding: "6px 16px",
+    border: "1px solid",
+    lineHeight: 1.5,
     backgroundColor: "#dd5f5f",
     borderColor: "#dd5f5f",
-    // position: "relative",
-    // bottom: 50,
-    center: 0,
+    fontFamily: [
+      "-apple-system",
+      "BlinkMacSystemFont",
+      '"Segoe UI"',
+      "Roboto",
+      '"Helvetica Neue"',
+      "Arial",
+      "sans-serif",
+      '"Apple Color Emoji"',
+      '"Segoe UI Emoji"',
+      '"Segoe UI Symbol"',
+    ].join(","),
     "&:hover": {
       backgroundColor: "#D43535",
       borderColor: "#D43535",
       boxShadow: "none",
     },
   },
-}));
+})(Button);
+
 
 export function StopRecordBoardButton(props) {
-    const classes = useStyles();
+  // add hook for button
+  const [open, setOpen] = React.useState(false);
 
-    return (
-      <Box display="flex" justifyContent="center">
-        {/* stop Board recording */}
-        <BoardButton
-          variant="contained"
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  return (
+    <Box display="flex" justifyContent="center">
+      {/* stop Board recording */}
+      <BoardButton
+        variant="contained"
+        color="primary"
+        disableRipple
+        onClick={handleClickOpen}
+      >
+        <Typography
+          variant="button"
+          component="h2"
+          align="center"
+          display="block"
           color="primary"
-          disableRipple
-          className={classes.root}
-          {...props.position}
         >
-          <Typography
-            variant="button"
-            component="h2"
-            align="center"
-            display="block"
-            color="primary"
-          >
-            Board Abschliessen
-          </Typography>
-        </BoardButton>
-      </Box>
-    );
+          Board Abschliessen
+        </Typography>
+      </BoardButton>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+        transitionDuration={500}
+        TransitionComponent={Transition}
+        keepMounted
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"Ihre Aufzeichnung wird gespeichert!"}
+        </DialogTitle>
+      </Dialog>
+    </Box>
+  );
 }

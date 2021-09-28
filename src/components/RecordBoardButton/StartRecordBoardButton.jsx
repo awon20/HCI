@@ -4,9 +4,15 @@ import { Box, Button, Typography} from '@material-ui/core';
 import { withStyles } from "@material-ui/core/styles";
 import Dialog from "@material-ui/core/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import Slide from "@material-ui/core/Slide";
 
 
+// set the transition properties
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
+// set the button properties
 export const BoardButton = withStyles({
   root: {
     boxShadow: "none",
@@ -38,7 +44,7 @@ export const BoardButton = withStyles({
 })(Button);
 
 export function StartRecordBoardButton() {
-  // add hoock for button
+  // add hook for button
     const [open, setOpen] = React.useState(false);
 
     const handleClickOpen = () => {
@@ -70,12 +76,17 @@ export function StartRecordBoardButton() {
           </Typography>
         </BoardButton>
         <Dialog
-            open={open}
-            onClose={handleClose}
-            aria-labelledby="alert-dialog-title"
-            aria-describedby="alert-dialog-description"
-         >
-        <DialogTitle id="alert-dialog-title">{"Ihre Aufzeichnung startet jetzt!"}</DialogTitle>
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+          transitionDuration={500}
+          TransitionComponent={Transition}
+          keepMounted
+        >
+          <DialogTitle id="alert-dialog-title">
+            {"Ihre Aufzeichnung startet jetzt!"}
+          </DialogTitle>
         </Dialog>
       </Box>
     </div>
