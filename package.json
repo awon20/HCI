@@ -7,9 +7,9 @@
   "dependencies": {
     "@material-ui/core": "^4.12.3",
     "@material-ui/icons": "^4.11.2",
-    "@material/circular-progress": "^12.0.0",
+    "@material/circular-progress": "^13.0.0",
     "@testing-library/jest-dom": "^5.14.1",
-    "@testing-library/react": "^12.1.0",
+    "@testing-library/react": "^12.1.1",
     "@testing-library/user-event": "^13.2.1",
     "clsx": "^1.1.1",
     "react": "^17.0.2",
@@ -53,7 +53,7 @@
     ]
   },
   "devDependencies": {
-    "@iconify-icons/mdi": "^1.1.27",
+    "@iconify-icons/mdi": "^1.1.31",
     "@iconify/react": "^3.0.1",
     "framer-motion": "^4.1.17",
     "gh-pages": "^3.2.3",
