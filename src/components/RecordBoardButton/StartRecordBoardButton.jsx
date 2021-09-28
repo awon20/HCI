@@ -2,28 +2,8 @@ import React from 'react';
 
 import { Box, Button, Typography} from '@material-ui/core';
 import { withStyles } from "@material-ui/core/styles";
-// import { BoardButton } from "../../components/";
 
-// const theme = createTheme();
 
-// const useStyles = makeStyles((theme) => ({
-
-//   root: {
-//     // margin: theme.spacing(10),
-    
-//     mainColor: theme.palette.primary.main,
-//     backgroundColor: theme.palette.primary.dark,
-//     borderColor: theme.palette.primary.dark,
-//     // position: "relative",
-//     // bottom: 50,
-//     center: 0,
-//     "&:hover": {
-//       backgroundColor: theme.palette.primary.dark,
-//       borderColor: theme.palette.primary.dark,
-//       boxShadow: "none",
-//     },
-//   },
-// }));
 export const BoardButton = withStyles({
   root: {
     boxShadow: "none",
