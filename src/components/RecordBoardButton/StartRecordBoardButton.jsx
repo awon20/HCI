@@ -2,6 +2,9 @@ import React from 'react';
 
 import { Box, Button, Typography} from '@material-ui/core';
 import { withStyles } from "@material-ui/core/styles";
+import Dialog from "@material-ui/core/Dialog";
+import DialogTitle from "@material-ui/core/DialogTitle";
+
 
 
 export const BoardButton = withStyles({
@@ -35,7 +38,15 @@ export const BoardButton = withStyles({
 })(Button);
 
 export function StartRecordBoardButton() {
-  //  const classes = useStyles();
+  // add hoock for button
+    const [open, setOpen] = React.useState(false);
+
+    const handleClickOpen = () => {
+      setOpen(true);
+    };
+    const handleClose = () => {
+      setOpen(false);
+    };
   return (
     <div>
       <Box display="flex" justifyContent="center">
@@ -44,6 +55,7 @@ export function StartRecordBoardButton() {
           variant="contained"
           color="primary"
           disableRipple
+          onClick={handleClickOpen}
           // getMediaStream={this.getMediaStream}
           // className={classes.root}
         >
@@ -57,12 +69,15 @@ export function StartRecordBoardButton() {
             Board Aufzeichnen
           </Typography>
         </BoardButton>
+        <Dialog
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+         >
+        <DialogTitle id="alert-dialog-title">{"Ihre Aufzeichnung startet jetzt!"}</DialogTitle>
+        </Dialog>
       </Box>
-      {/* <Box>
-        <RecordingAPI>
-        
-        </RecordingAPI>
-      </Box> */}
     </div>
   );
 }
