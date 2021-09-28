@@ -23,3 +23,6 @@ export { ThemePaletteColors } from "./ThemePaletteColors/ThemePaletteColors";
 export {
   StyledSwitchButton} from "./StyledSwitchButtons/StyledSwitchButtons";
 export { ToggleSwitchCamera } from "./ToggleSwitchCamera/ToggleSwitchCamera";
+export {
+  CustomThemeContext,
+} from "./CustomThemeProvider/CustomThemeProvider";
