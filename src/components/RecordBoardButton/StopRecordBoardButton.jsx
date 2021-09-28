@@ -56,6 +56,7 @@ export function StopRecordBoardButton(props) {
             component="h2"
             align="center"
             display="block"
+            color="primary"
           >
             Board Abschliessen
           </Typography>

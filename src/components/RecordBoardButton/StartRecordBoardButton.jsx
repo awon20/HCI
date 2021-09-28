@@ -72,6 +72,7 @@ export function StartRecordBoardButton() {
             component="h2"
             align="center"
             display="block"
+            color="primary"
           >
             Board Aufzeichnen
           </Typography>
