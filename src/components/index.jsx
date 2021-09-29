@@ -15,7 +15,7 @@ export { StopRecordBoardButton } from "./RecordBoardButton/StopRecordBoardButton
 export { PenDrawing } from "./PenDrawing/PenDrawing";
 export { CameraMicroBox } from "./CameraMicroBox/CameraMicroBox";
 export { LoadingPage } from "./LoadingPage/LoadingPage";
-export { ToolsBox } from "./ToolsBox/ToolsBox";
+export { ToolsBox1, ToolsBox2 } from "./ToolsBox/ToolsBox";
 export { RecordingButton } from "./VideoRecorderComponent/RecordingButton";
 export { RecordingAPI } from "./VideoRecorderComponent/RecordingAPI";
 export { BoardButton } from "./BoardButtonStyles/BoardButtonStyles";
