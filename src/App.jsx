@@ -13,10 +13,9 @@ import {
   SketchBoardCamOnMicOn,
   SketchBoardMicOn,
   SketchBoardCamOffMicOff,
-  MiniDrawer,
+  // MiniDrawer,
   SketchBoardSummary,
 } from "./pages";
-// import { ThemePaletteColors } from "./components";
 import { LoadingSpinner } from "./pages/LoadingSpinner/LoadingSpinner";
 
 
@@ -61,11 +60,12 @@ function App() {
           <Route path="/sketchboard-cam-off-mic-off">
             <SketchBoardCamOffMicOff />
           </Route>
-          <Route path="/sketchboard-summary"></Route>
-          <SketchBoardSummary />
-          <Route path="/minidrawer">
-            <MiniDrawer />
+          <Route path="/sketchboard-summary">
+            <SketchBoardSummary />
           </Route>
+          {/* <Route path="/minidrawer">
+            <MiniDrawer />
+          </Route> */}
         </Switch>
         {/* </ThemeProvider> */}
       </div>
