@@ -15,7 +15,8 @@ import {
   StartRecordBoardButton,
   StopRecordBoardButton,
   CameraMicroBox,
-  ToolsBox,
+  ToolsBox1,
+  ToolsBox2,
   PenDrawing,
   RecordingButton
 } from "../../components";
@@ -23,7 +24,7 @@ import {
 
 // import {  SketchBoardSummary } from "../../pages"
 
-const drawerWidth = 650;
+const drawerWidth = 670;
 
 // const pagesTransition = [
 //   {
@@ -152,7 +153,13 @@ export function BoardLayout() {
           <Box className={clsx(classes.styledComponents, classes.contentAlign)}>
             <Paper elevation={1}>
               {/* Utils Lists from components ToolsBox */}
-              <ToolsBox />
+              <ToolsBox1 />
+            </Paper>
+          </Box>
+          <Box className={clsx(classes.styledComponents, classes.contentAlign)}>
+            <Paper elevation={1}>
+              {/* Utils Lists from components ToolsBox */}
+              <ToolsBox2 />
             </Paper>
           </Box>
         </div>
