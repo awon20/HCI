@@ -1,9 +1,10 @@
 import React from 'react'
+import { BoardCard } from "../../components";
 
 export function SketchBoardSummary() {
     return (
-        <div>
-            summary of sketch
-        </div>
-    )
+      <div>
+        <BoardCard />
+      </div>
+    );
 }
