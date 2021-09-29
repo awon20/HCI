@@ -5,6 +5,7 @@ import { withStyles } from "@material-ui/core/styles";
 import Dialog from "@material-ui/core/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Slide from "@material-ui/core/Slide";
+// import RefreshIndicator from "@material-ui/icons/RefreshRounded";
 
 
 // set the transition properties
@@ -21,8 +22,8 @@ export const BoardButton = withStyles({
     padding: "6px 16px",
     border: "1px solid",
     lineHeight: 1.5,
-    backgroundColor: "#aad1c6",
-    borderColor: "#aad1c6",
+    backgroundColor: "#95C6B8",
+    borderColor: "#95C6B8",
     fontFamily: [
       "-apple-system",
       "BlinkMacSystemFont",
@@ -88,6 +89,32 @@ export function StartRecordBoardButton() {
             {"Ihre Aufzeichnung startet jetzt!"}
           </DialogTitle>
         </Dialog>
+        {/* <Dialog
+          bodyStyle={{ margin: 0, padding: 0 }}
+          open={true}
+          onClose={handleClose}
+          style={{
+            width: "200px",
+            marginLeft: "40%",
+            backgroundColor: "transparent",
+          }}
+          title="Loading"
+          titleStyle={{
+            paddingTop: "0px",
+            paddingLeft: "45px",
+            fontSize: "15px",
+            lineHeight: "40px",
+          }}
+        >
+          <RefreshIndicator
+            style={{ display: "inline-block" }}
+            size={50}
+            left={50}
+            top={30}
+            loadingColor="#FF9800"
+            status="loading"
+          />
+        </Dialog> */}
       </Box>
     </div>
   );
