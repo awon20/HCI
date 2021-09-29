@@ -11,6 +11,7 @@ const useStyles = makeStyles({
 
 export function SketchBoardCamOnMicOn() {
   const classes = useStyles();
+  
   return (
     <div className={classes.container}>
       <BoardLayout />
