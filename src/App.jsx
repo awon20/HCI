@@ -15,8 +15,10 @@ import {
   SketchBoardCamOffMicOff,
   // MiniDrawer,
   SketchBoardSummary,
+  LoadingSpinner,
 } from "./pages";
-import { LoadingSpinner } from "./pages/LoadingSpinner/LoadingSpinner";
+import { PenDrawing } from "./components";
+// import { LoadingSpinner } from "./pages/LoadingSpinner/LoadingSpinner";
 
 
 
@@ -66,6 +68,9 @@ function App() {
           {/* <Route path="/minidrawer">
             <MiniDrawer />
           </Route> */}
+          <Route path="/pendrawer">
+            <PenDrawing />
+          </Route>
         </Switch>
         {/* </ThemeProvider> */}
       </div>
