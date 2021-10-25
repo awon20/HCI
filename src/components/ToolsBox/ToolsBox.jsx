@@ -150,7 +150,7 @@ import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
 const useStyles = makeStyles((theme) => {
   return {
     root: {
-      width: 650,
+      // width: "fit-content",
       height: "fit-content",
       border: `2px solid ${theme.palette.divider}`,
       borderRadius: theme.shape.borderRadius,
