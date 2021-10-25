@@ -16,7 +16,6 @@ import {
   StopRecordBoardButton,
   CameraMicroBox,
   ToolsBox1,
-  ToolsBox2,
   PenDrawing,
   RecordingButton
 } from "../../components";
@@ -63,6 +62,7 @@ const useStyles = makeStyles((theme) => ({
   },
   styledComponents: {
     margin: theme.spacing(5, "auto"),
+    width: theme.spacing("auto")
   },
   contentAlign: {
     margin: theme.spacing(5, "auto"),
@@ -154,12 +154,6 @@ export function BoardLayout() {
             <Paper elevation={1}>
               {/* Utils Lists from components ToolsBox */}
               <ToolsBox1 />
-            </Paper>
-          </Box>
-          <Box className={clsx(classes.styledComponents, classes.contentAlign)}>
-            <Paper elevation={1}>
-              {/* Utils Lists from components ToolsBox */}
-              <ToolsBox2 />
             </Paper>
           </Box>
         </div>
