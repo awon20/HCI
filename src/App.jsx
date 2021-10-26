@@ -4,6 +4,7 @@ import { Switch, Route } from "react-router-dom";
 // import CssBaseline from "@material-ui/core/CssBaseline"; //  CssBaseline component to kickstart an elegant, consistent, and simple baseline to build upon
 
 import { useState, useEffect } from "react";
+// import { Board } from "./@UI/components/Board/Board";
 
 import "./App.css";
 import {
@@ -16,8 +17,8 @@ import {
   // MiniDrawer,
   SketchBoardSummary,
   LoadingSpinner,
-} from "./pages";
-import { PenDrawing } from "./components";
+} from "./@UI/pages";
+import { PenDrawing } from "./@UI/components";
 // import { LoadingSpinner } from "./pages/LoadingSpinner/LoadingSpinner";
 
 
