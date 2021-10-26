@@ -143,7 +143,7 @@ export function BoardLayout() {
         </div>
         <div>
           <Box className={clsx(classes.styledComponents, classes.contentAlign)}>
-            <Paper elevation={1}>
+            <Paper elevation={3}>
               {/* Camera and Micro from components CameraMicroBox*/}
               <CameraMicroBox />
             </Paper>
