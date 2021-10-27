@@ -1,9 +1,0 @@
-body {
-    background: Linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%),
-    /* background: rgb(57,180,79);
-    background: linear-gradient(90deg, rgba(57,180,79,1) 0%, rgba(196,86,31,1) 51%); */
-}
-
-.Loading{
-  align-content: center;
-}
