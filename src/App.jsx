@@ -17,8 +17,8 @@ import {
   // MiniDrawer,
   SketchBoardSummary,
   LoadingSpinner,
-} from "./@UI/pages";
-import { PenDrawing } from "./@UI/components";
+} from "./pages";
+import { PenDrawing } from "./components";
 // import { LoadingSpinner } from "./pages/LoadingSpinner/LoadingSpinner";
 
 

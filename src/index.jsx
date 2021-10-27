@@ -4,7 +4,7 @@ import "./index.css";
 import App from "./App";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { BrowserRouter as Router } from "react-router-dom";
-import CustomThemeProvider from "./@UI/components/CustomThemeProvider/CustomThemeProvider";
+import CustomThemeProvider from "./components/CustomThemeProvider/CustomThemeProvider";
 ReactDOM.render(
   <CustomThemeProvider>
     <Router>
