@@ -1,4 +1,4 @@
-import React, {  } from "react";
+import React, { useRef } from "react";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import { Paper, Box } from "@material-ui/core";
@@ -11,11 +11,11 @@ import {
   StopRecordBoardButton,
   CameraMicroBox,
   RecordingButton,
-  Canvas,
-  RecordingAPI,
-  CanvasProvider
+  // Canvas,
+  // RecordingAPI,
+  // CanvasProvider
 } from "../../components";
-
+import CanvasDraw from "react-canvas-draw";
 
 
 const drawerWidth = 670;
@@ -59,6 +59,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(0),
   },
 }));
+
 export function BoardLayout() {
   // eslint-disable-next-line no-lone-blocks
   {
@@ -66,11 +67,31 @@ export function BoardLayout() {
   }
   const classes = useStyles();
   const history = useHistory();
+  const canvasRef = useRef(null);
+  const canvasRefSave = useRef(null);
 
-  const handleClick = (e) => {
+  const downloadCanvas = (e) => {
     e.preventDefault();
     history.push("sketchboard-summary");
   };
+  const SaveCanvas = () => {
+    const canvasData = canvasRef.current.getSaveData()
+    canvasRefSave.current.loadSaveData(canvasData);
+  }
+  const handleClear =  () => {
+    canvasRef.current.clear();
+  }
+
+  const handleUndo = () => {
+    canvasRef.current.undo();
+  }
+  const handleClearAll = () => {
+    canvasRef.current.eraseAll();
+  }
+  const handleResetView = () => {
+    canvasRef.current.resetView();
+  }
+
 
   return (
     <div className={classes.root}>
@@ -112,7 +133,6 @@ export function BoardLayout() {
           <Box className={clsx(classes.styledComponents, classes.contentAlign)}>
             {/* RecordView for Video from components VideoRecorderComponent  */}
             <RecordingButton />
-            <RecordingAPI />
           </Box>
         </div>
         <div>
@@ -139,7 +159,7 @@ export function BoardLayout() {
             {/* SketchBoard Stop recording from components RecordBoardButton */}
 
             <StopRecordBoardButton
-              onClick={handleClick}
+              onClick={downloadCanvas}
             ></StopRecordBoardButton>
           </Box>
         </div>
@@ -147,9 +167,34 @@ export function BoardLayout() {
 
       {/** Drawing Area */}
       <div className={classes.content}>
-      <CanvasProvider>
+        <button onClick={SaveCanvas}>Save Drawing</button>
+        <button onClick={handleClear}>Clear</button>
+        <button onClick={handleUndo}>Undo</button>
+        <button onClick={handleClearAll}>ClearAll</button>
+        <button onClick={handleResetView}>Reset</button>
+        <CanvasDraw
+          brushRadius={1}
+          brushColor={this.state.color}
+          canvasWidth={500}
+          canvasHeight={500}
+          catenaryColor="red"
+          hideGrid={true}
+          enablePanAndZoom={true}
+          style={{ border: "1px solid #000" }}
+          ref={canvasRef}
+          loadTimeOffset={10}
+        />
+        <CanvasDraw
+          ref={canvasRefSave}
+          canvasWidth={500}
+          canvasHeight={500}
+          hideGrid={true}
+          disable={true}
+        />
+
+        {/* <CanvasProvider>
         <Canvas />
-      </CanvasProvider>
+      </CanvasProvider> */}
       </div>
       {/* <div className={classes.page}>{children}</div> */}
     </div>
