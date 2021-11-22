@@ -33,6 +33,7 @@ export const styles = reactCSS({
       textAlign: "center",
       alignItems: "center",
       justifyContent: "center",
+      position: "relative",
 
       marginTop:
         window.innerWidth <= 1024 //320

@@ -1,17 +1,31 @@
 import React, { useEffect, useState } from "react";
-import "./DrawingBoard.css";
-import SwitchTools from "../DrawingCanvas/SwitchTools";
+import clsx from "clsx";
+import { Drawer as MUIDrawer } from "@material-ui/core/";
+import { Paper, Box } from "@material-ui/core";
 import rough from "roughjs/bundled/rough.esm";
+import { useHistory } from "react-router";
+import {
+  StartRecordBoardButton,
+  StopRecordBoardButton,
+  CameraMicroBox,
+  RecordingButton,
+} from "../../components";
+import { SwitchTools } from "../DrawingCanvas/SwitchDrawingTools";
 import {
   CreateDrawingElements,
   adjustElementCoordinates,
   cursorForPosition,
   resizedCoordinates,
   midPointBtw,
-  getElementAtPosition,
+  getElementAtPosition
 } from "../DrawingCanvas/DrawingElements";
+import { styles } from "./DrawingBoardStyles";
 
-function DrawingBoard() {
+export function DrawingBoard() {
+
+  /* Hook functions */
+  const classes = styles();
+  const history = useHistory();
   const [points, setPoints] = useState([]);
   const [path, setPath] = useState([]);
   const [isDrawing, setIsDrawing] = useState(false);
@@ -27,6 +41,12 @@ function DrawingBoard() {
   const [width, setWidth] = useState(1);
   const [shapeWidth, setShapeWidth] = useState(1);
   const [popped, setPopped] = useState(false);
+
+  /* go to the summarypage*/
+  const handleClick = (e) => {
+    e.preventDefault();
+    history.push("sketchboard-summary");
+  };
 
   useEffect(() => {
     const canvas = document.getElementById("canvas");
@@ -69,7 +89,8 @@ function DrawingBoard() {
 
     const roughCanvas = rough.canvas(canvas);
 
-    if (path !== undefined) drawpath();
+    if (path !== undefined)
+      drawpath();
 
     context.lineWidth = shapeWidth;
 
@@ -111,16 +132,15 @@ function DrawingBoard() {
   };
 
   const checkPresent = (clientX, clientY) => {
-    if (path === undefined) return;
+    if (path === undefined)
+      return;
     var newPath = path;
     path.forEach((stroke, index) => {
       stroke.forEach((point, i) => {
-        if (
-          clientY < point.clientY + 10 &&
+        if (clientY < point.clientY + 10 &&
           clientY > point.clientY - 10 &&
           clientX < point.clientX + 10 &&
-          clientX > point.clientX - 10
-        ) {
+          clientX > point.clientX - 10) {
           //console.log("Popped");
           newPath.splice(index, 1);
           setPopped(true);
@@ -131,12 +151,10 @@ function DrawingBoard() {
     });
     const newElements = elements;
     newElements.forEach((ele, index) => {
-      if (
-        clientX >= ele.x1 &&
+      if (clientX >= ele.x1 &&
         clientX <= ele.x2 &&
         clientY >= ele.y1 &&
-        clientY <= ele.y2
-      ) {
+        clientY <= ele.y2) {
         console.log("Popped....");
         newElements.splice(index, 1);
         setPopped(true);
@@ -224,7 +242,8 @@ function DrawingBoard() {
       checkPresent(clientX, clientY);
     }
     if (action === "sketching") {
-      if (!isDrawing) return;
+      if (!isDrawing)
+        return;
       const colour = points[points.length - 1].newColour;
       const linewidth = points[points.length - 1].newLinewidth;
       const transparency = points[points.length - 1].transparency;
@@ -252,30 +271,21 @@ function DrawingBoard() {
       );
     } else if (action === "moving") {
       const {
-        id,
-        x1,
-        x2,
-        y1,
-        y2,
-        type,
-        offsetX,
-        offsetY,
-        shapeWidth,
-        strokeColor,
+        id, x1, x2, y1, y2, type, offsetX, offsetY, shapeWidth, strokeColor,
       } = selectedElement;
       const offsetWidth = x2 - x1;
       const offsetHeight = y2 - y1;
       const newX = clientX - offsetX;
       const newY = clientY - offsetY;
       updateElement(
-          id,
-          newX,
-          newY,
-          newX + offsetWidth,
-          newY + offsetHeight,
-          type,
-          shapeWidth,
-          strokeColor
+        id,
+        newX,
+        newY,
+        newX + offsetWidth,
+        newY + offsetHeight,
+        type,
+        shapeWidth,
+        strokeColor
       );
     } else if (action === "resize") {
       const { id, type, position, ...coordinates } = selectedElement;
@@ -312,40 +322,111 @@ function DrawingBoard() {
   };
 
   return (
-    <div>
-      <SwitchTools
-        toolType={toolType}
-        setToolType={setToolType}
-        width={width}
-        setWidth={setWidth}
-        setElements={setElements}
-        setColorWidth={setColorWidth}
-        setPath={setPath}
-        colorWidth={colorWidth}
-        setShapeWidth={setShapeWidth}
-      />
-      <canvas
-        id="canvas"
-        className="Canvas"
-        width={window.innerWidth}
-        height={window.innerHeight}
-        onMouseDown={handleMouseDown}
-        onMouseMove={handleMouseMove}
-        onMouseUp={handleMouseUp}
-        onTouchStart={(e) => {
-          var touch = e.touches[0];
-          handleMouseDown({ clientX: touch.clientX, clientY: touch.clientY });
-        }}
-        onTouchMove={(e) => {
-          var touch = e.touches[0];
-          handleMouseMove({ clientX: touch.clientX, clientY: touch.clientY });
-        }}
-        onTouchEnd={handleMouseUp}
+    <div className={classes.root}>
+      <MUIDrawer
+        className={classes.drawer}
+        variant="permanent"
+        anchor="left"
+        classes={{ paper: classes.drawerPaper }}
       >
-        Canvas
-      </canvas>
+        <div>
+          <Box
+            className={clsx(
+              classes.styledComponents,
+              classes.BtnStartSketchRec
+            )}
+          >
+            {/* SketchBoard Start recording from components RecordBoardButton */}
+            <StartRecordBoardButton />
+          </Box>
+        </div>
+        <div>
+          <Paper
+            elevation={6}
+            className={clsx(classes.styledComponents, classes.contentAlign)}
+          >
+            <Box p={1}>
+              {/* RecordView for Video from components VideoRecorderComponent  */}
+              <RecordingButton />
+              {/* <RecordingAPI /> */}
+            </Box>
+          </Paper>
+        </div>
+        <div>
+          <Paper
+            sx={{ width: 0.5, bgcolor: "grey.300", p: 1, my: 0.5 }}
+            elevation={6}
+            className={clsx(
+              classes.styledComponents,
+              classes.contentAlign,
+              classes.contentColor
+            )}
+          >
+            <Box p={1}>
+              {/* Camera and Micro from components CameraMicroBox*/}
+            </Box>
+            <CameraMicroBox />
+          </Paper>
+        </div>
+        <div>
+          <Paper
+            elevation={6}
+            className={clsx(classes.styledComponents, classes.contentAlign)}
+          >
+            <Box p={1}>
+              {/* Utils Lists from components ToolsBox */}
+              <SwitchTools
+                toolType={toolType}
+                setToolType={setToolType}
+                width={width}
+                setWidth={setWidth}
+                setElements={setElements}
+                setColorWidth={setColorWidth}
+                setPath={setPath}
+                colorWidth={colorWidth}
+                setShapeWidth={setShapeWidth}
+              />
+            </Box>
+          </Paper>
+        </div>
+        <div>
+          <Box
+            className={clsx(classes.styledComponents, classes.BtnStopSketchRec)}
+          >
+            {/* SketchBoard Stop recording from components RecordBoardButton */}
+            <StopRecordBoardButton
+              onClick={handleClick}
+            />
+          </Box>
+        </div>
+        {/** Drawing Area */}
+      </MUIDrawer>
+      <div className={classes.content}>
+        <canvas
+          id="canvas"
+          className="Canvas"
+          width={window.innerWidth}
+          height={window.innerHeight}
+          onMouseDown={handleMouseDown}
+          onMouseMove={handleMouseMove}
+          onMouseUp={handleMouseUp}
+          onTouchStart={(e) => {
+            var touch = e.touches[0];
+            handleMouseDown({
+              clientX: touch.clientX,
+              clientY: touch.clientY,
+            });
+          }}
+          onTouchMove={(e) => {
+            var touch = e.touches[0];
+            handleMouseMove({
+              clientX: touch.clientX,
+              clientY: touch.clientY,
+            });
+          }}
+          onTouchEnd={handleMouseUp}
+        />
+      </div>
     </div>
   );
 }
-
-export default DrawingBoard;

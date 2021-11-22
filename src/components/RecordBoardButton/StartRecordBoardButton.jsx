@@ -14,7 +14,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 // set the button properties
-export const BoardButton = withStyles({
+const styles = theme => ({
   root: {
     boxShadow: "none",
     textTransform: "none",
@@ -44,7 +44,8 @@ export const BoardButton = withStyles({
   },
 })(Button);
 
-export function StartRecordBoardButton() {
+
+export  const StartRecordBoardButton = () =>{
   // add hook for button
     const [open, setOpen] = React.useState(false);
 
@@ -58,24 +59,21 @@ export function StartRecordBoardButton() {
     <div>
       <Box display="flex" justifyContent="center">
         {/* start Board recording */}
-        <BoardButton
+        <Button
           variant="contained"
           color="primary"
           disableRipple
           onClick={handleClickOpen}
-          // getMediaStream={this.getMediaStream}
-          // className={classes.root}
         >
           <Typography
             variant="button"
             component="h2"
             align="center"
             display="block"
-            color="primary"
           >
             Board Aufzeichnen
           </Typography>
-        </BoardButton>
+        </Button>
         <Dialog
           open={open}
           onClose={handleClose}
@@ -89,33 +87,8 @@ export function StartRecordBoardButton() {
             {"Ihre Aufzeichnung startet jetzt!"}
           </DialogTitle>
         </Dialog>
-        {/* <Dialog
-          bodyStyle={{ margin: 0, padding: 0 }}
-          open={true}
-          onClose={handleClose}
-          style={{
-            width: "200px",
-            marginLeft: "40%",
-            backgroundColor: "transparent",
-          }}
-          title="Loading"
-          titleStyle={{
-            paddingTop: "0px",
-            paddingLeft: "45px",
-            fontSize: "15px",
-            lineHeight: "40px",
-          }}
-        >
-          <RefreshIndicator
-            style={{ display: "inline-block" }}
-            size={50}
-            left={50}
-            top={30}
-            loadingColor="#FF9800"
-            status="loading"
-          />
-        </Dialog> */}
       </Box>
     </div>
   );
 }
+export default withStyles(styles, { withTheme: true })(StartRecordBoardButton);

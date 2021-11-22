@@ -12,7 +12,6 @@ export { SketchBoard } from "./SketchBoard/SketchBoard";
 export { RecordView } from "./VideoRecorderComponent/RecordView";
 export { StartRecordBoardButton } from "./RecordBoardButton/StartRecordBoardButton";
 export { StopRecordBoardButton } from "./RecordBoardButton/StopRecordBoardButton";
-export { PenDrawing } from "./PenDrawing/PenDrawing";
 export { CameraMicroBox } from "./CameraMicroBox/CameraMicroBox";
 export { LoadingPage } from "./LoadingPage/LoadingPage";
 export { ToolsBox1, ToolsBox2 } from "./ToolsBox/ToolsBox";
@@ -22,8 +21,9 @@ export { BoardButton } from "./BoardButtonStyles/BoardButtonStyles";
 export { ThemePaletteColors } from "./ThemePaletteColors/ThemePaletteColors";
 export { StyledSwitchButton } from "./StyledSwitchButtons/StyledSwitchButtons";
 export { ToggleSwitchCamera } from "./ToggleSwitchCamera/ToggleSwitchCamera";
-
 export { CustomThemeContext } from "./CustomThemeProvider/CustomThemeProvider";
-
-// export { SwitchTools } from "./DrawingCanvas/SwitchTools";
-// export { ColoursPicker } from "./DrawingCanvas/ColoursPicker";
+export { DrawingBoard } from "./DrawingBoard/DrawingBoard";
+export { Sketchpad } from "./Sketchpad/Sketchpad";
+export { sketchpadState, SketchpadContext } from "./Sketchpad/SketchContext";
+export { Canvas } from "./SketchCanvas/Canvas"
+export { CanvasProvider } from "./SketchCanvas/CanvasContext"

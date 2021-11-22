@@ -36,22 +36,3 @@ export const StyledSwitchButton = withStyles((theme) => ({
   checked: {},
 }))(Switch);
 
-
-// export const IosSwitchStyle = () => {
-//   const [toggled, setToggled] = React.useState(false);
-//   const iosStyles = useIosSwitchStyles();
-//   return (
-//     <div>
-//       <Switch
-//         classes={iosStyles}
-//         checked={toggled}
-//         onChange={(e) => setToggled(e.target.checked)}
-//       />
-//       <Switch
-//         classes={iosStyles}
-//         checked={!toggled}
-//         onChange={(e) => setToggled(!e.target.checked)}
-//       />
-//     </div>
-//   );
-// };

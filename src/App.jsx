@@ -1,10 +1,8 @@
-// import { BrowserRouter as Router, Route } from "react-router-dom";
 import { Switch, Route } from "react-router-dom";
-// import { ThemeProvider } from "@material-ui/core/styles";
-// import CssBaseline from "@material-ui/core/CssBaseline"; //  CssBaseline component to kickstart an elegant, consistent, and simple baseline to build upon
-
+import { ThemeProvider } from "@material-ui/core/styles";
+import { createTheme } from "@material-ui/core/styles";
+import CssBaseline from "@material-ui/core/CssBaseline";
 import { useState, useEffect } from "react";
-// import { Board } from "./@UI/components/Board/Board";
 
 import "./App.css";
 import {
@@ -18,11 +16,30 @@ import {
   SketchBoardSummary,
   LoadingSpinner,
 } from "./pages";
-import { PenDrawing } from "./components";
-// import { LoadingSpinner } from "./pages/LoadingSpinner/LoadingSpinner";
 
-
-
+  /*This  component Providing the colors directly for the all App*/
+ const theme = createTheme({
+   palette: {
+     primary: {
+       light: "#688a80",
+       main: "#95C6B8",
+       dark: "#aad1c6",
+       contrastText: "#fff",
+     },
+     secondary: {
+       light: "#dc5d5d",
+       main: "#D43535",
+       dark: "#942525",
+       contrastText: "#000",
+     },
+     typography: {
+       fontFamily: "Quicksand",
+     },
+     background: {
+       color: "#fff"
+     }
+   },
+ });
 
 function App() {
   const [isLoading, setIsLoading] = useState(false);
@@ -39,8 +56,8 @@ function App() {
     }
     return (
       <div>
-        {/* <ThemeProvider> */}
-        {/* <CssBaseline /> */}
+        <ThemeProvider theme={theme}>
+        <CssBaseline />
         <Switch>
           <Route exact path="/sketchbox-pages">
             <WelcomePage onClick={() => setIsLoading(true)} />
@@ -69,11 +86,8 @@ function App() {
           {/* <Route path="/minidrawer">
             <MiniDrawer />
           </Route> */}
-          <Route path="/pendrawer">
-            <PenDrawing />
-          </Route>
         </Switch>
-        {/* </ThemeProvider> */}
+        </ThemeProvider>
       </div>
     );
 }

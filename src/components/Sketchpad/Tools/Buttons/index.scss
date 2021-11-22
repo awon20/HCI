@@ -1,0 +1,16 @@
+.button {
+  color: white;
+  padding: 10px;
+  
+  &.download {
+    background-color: blue;
+  }
+  
+  &.clear {
+    background-color: red;
+  }
+    &.reset {
+    background-color: green;
+  }
+
+}

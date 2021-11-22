@@ -44,21 +44,7 @@ export function MicroLoader() {
       return (
         <div>
           <FormGroup row>
-            <FormControlLabel
-              disabled
-              control={
-                <IconButton
-                  aria-label="micro on/off"
-                  tooltip="status of the micro"
-                  variant="raised"
-                  style={{ backgroundColor: "transparent" }}
-                >
-                  <MicNoneOutlinedIcon className={classes.micro} />
-                  {/* <MicOffOutlinedIcon className={classes.micro} /> */}
-                </IconButton>
-              }
-            />
-
+            {" "}
             <FormControlLabel
               aria-label="micro on/off"
               tooltip="Change the status of the micro"
@@ -73,6 +59,20 @@ export function MicroLoader() {
                     color="primary"
                   />
                 </ThemeProvider>
+              }
+            />
+            <FormControlLabel
+              disabled
+              control={
+                <IconButton
+                  aria-label="micro on/off"
+                  tooltip="status of the micro"
+                  variant="raised"
+                  style={{ backgroundColor: "transparent" }}
+                >
+                  <MicNoneOutlinedIcon className={classes.micro} />
+                  {/* <MicOffOutlinedIcon className={classes.micro} /> */}
+                </IconButton>
               }
             />
           </FormGroup>

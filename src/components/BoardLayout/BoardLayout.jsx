@@ -5,39 +5,20 @@ import { Paper, Box } from "@material-ui/core";
 import {
   Drawer as MUIDrawer,
 } from "@material-ui/core/";
-// import Typography from "@material-ui/core/Typography";
-// import FormControlLabel from "@material-ui/core/FormControlLabel";
-// import Toolbar from "@material-ui/core/Toolbar";
-// import AppBar from "@material-ui/core/AppBar";
-// import SwitchUI from "@material-ui/core/Switch";
 import { useHistory } from "react-router";
 import {
   StartRecordBoardButton,
   StopRecordBoardButton,
   CameraMicroBox,
-  // ToolsBox1,
-  // PenDrawing,
   RecordingButton,
+  Canvas,
   RecordingAPI,
+  CanvasProvider
 } from "../../components";
-// import  SwitchTools from "../DrawingCanvas/SwitchTools"
-import DrawingBoard from "../DrawingBoard/DrawingBoard";
 
 
-// import {  SketchBoardSummary } from "../../pages"
 
 const drawerWidth = 670;
-
-// const pagesTransition = [
-//   {
-//     page: <SketchBoardSummary />,
-//     path: "sketchboard-summary",
-//   },
-// {
-//   page: <BoardClosingDialog />,
-//   path: "/sketchbox-pages",
-// },
-// ];
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -85,17 +66,6 @@ export function BoardLayout() {
   }
   const classes = useStyles();
   const history = useHistory();
-  // const { currentTheme, setTheme } = useContext(CustomThemeContext);
-  // const isDark = Boolean(currentTheme === "dark");
-
-  // const handleThemeChange = (event) => {
-  //   const { checked } = event.target;
-  //   if (checked) {
-  //     setTheme("dark");
-  //   } else {
-  //     setTheme("normal");
-  //   }
-  // };
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -177,8 +147,9 @@ export function BoardLayout() {
 
       {/** Drawing Area */}
       <div className={classes.content}>
-        {/* <PenDrawing /> */}
-        <DrawingBoard />
+      <CanvasProvider>
+        <Canvas />
+      </CanvasProvider>
       </div>
       {/* <div className={classes.page}>{children}</div> */}
     </div>

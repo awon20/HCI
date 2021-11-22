@@ -1,12 +1,14 @@
-import React from 'react'
-import { makeStyles,ThemeProvider } from "@material-ui/core/styles";
-import { IconButton, CssBaseline, FormControlLabel, FormGroup } from "@material-ui/core";
+import React, { useState } from "react";
+import { makeStyles, ThemeProvider } from "@material-ui/core/styles";
+import {
+  IconButton,
+  CssBaseline,
+  FormControlLabel,
+  FormGroup,
+} from "@material-ui/core";
 import VideocamOutlinedIcon from "@material-ui/icons/VideocamOutlined";
-// import VideocamOffOutlinedIcon from "@material-ui/icons/VideocamOffOutlined";
-import { ThemePaletteColors, StyledSwitchButton } from "..";
-
-
-
+import VideocamOffOutlinedIcon from "@material-ui/icons/VideocamOffOutlined";
+import { ThemePaletteColors, StyledSwitchButton } from "../";
 
 const useStyles = makeStyles((theme) => ({
   controlPosition: {
@@ -17,10 +19,15 @@ const useStyles = makeStyles((theme) => ({
     paddingRight: theme.spacing(4),
     paddingBottom: theme.spacing(1),
   },
-  video: {
+  CamOn: {
     height: 50,
     width: 50,
     color: "#95C6B8",
+  },
+  CamOff: {
+    height: 50,
+    width: 50,
+    color: theme.palette.secondary,
   },
   toggle: {
     height: 50,
@@ -28,51 +35,62 @@ const useStyles = makeStyles((theme) => ({
     color: "#95C6B8",
   },
 }));
-console.trace();
+// console.trace();
 export function CameraLoader() {
-    const [state, setState] = React.useState({
-      checkedA: true,
-    });
+  const [state, setState] = React.useState({
+    checkedA: true,
+  });
+  const [isToggled, setisToggled] = useState(true);
 
-    const handleChange = (event) => {
-      setState({ ...state, [event.target.name]: event.target.checked });
-    };
-    const classes = useStyles();
-          return (
-            <div>
-              <FormGroup row>
-                <FormControlLabel
-                  aria-label="micro on/off"
-                  tooltip="Change the status of the micro"
-                  variant="raised"
-                  control={
-                    <ThemeProvider theme={ThemePaletteColors}>
-                      <CssBaseline />
-                      <StyledSwitchButton
-                        checked={state.checkedA}
-                        onChange={handleChange}
-                        name="checkedA"
-                        color="primary"
-                      />
-                    </ThemeProvider>
-                  }
-                />
-                <FormControlLabel
-                  disabled
-                  control={
-                    <IconButton
-                      aria-label="micro on/off"
-                      tooltip="status of the micro"
-                      variant="raised"
-                      style={{ backgroundColor: "transparent" }}
-                    >
-                      <VideocamOutlinedIcon className={classes.video} />
-                      {/* <VideocamOffOutlinedIcon className={classes.video} /> */}
-                    </IconButton>
-                  }
-                />
-              </FormGroup>
-            </div>
-          );
-        
-     };
+  const handleChange = (event) => {
+    setState({ ...state, [event.target.name]: event.target.checked });
+    setisToggled(false)
+  };
+  const classes = useStyles();
+  return (
+    <div>
+      <FormGroup row>
+        <FormControlLabel
+          aria-label="micro on/off"
+          tooltip="Change the status of the micro"
+          variant="raised"
+          control={
+            <ThemeProvider theme={ThemePaletteColors}>
+              <CssBaseline />
+              <StyledSwitchButton
+                checked={state.checkedA}
+                onChange={handleChange}
+                name="checkedA"
+                color="primary"
+              />
+            </ThemeProvider>
+          }
+        />
+        <FormControlLabel
+          disabled
+          control={
+            <IconButton
+              aria-label="micro on/off"
+              tooltip="status of the micro"
+              variant="raised"
+              style={{ backgroundColor: "transparent" }}
+              checked={isToggled}
+              label={isToggled ? "camOff" : "camOn"}
+            >
+              {/* Ternary operation */}
+              {/* condition ? “This is True” : “This is False” */}
+              {isToggled ? (
+                <VideocamOutlinedIcon className={classes.CamOn} />
+              ) : <VideocamOffOutlinedIcon className={classes.CamOff} /> &&
+                isToggled ? (
+                <VideocamOutlinedIcon className={classes.CamOn} />
+              ) : (
+                <VideocamOffOutlinedIcon className={classes.CamOff} />
+              )}
+            </IconButton>
+          }
+        />
+      </FormGroup>
+    </div>
+  );
+}
