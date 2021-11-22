@@ -174,7 +174,7 @@ export function BoardLayout() {
         <button onClick={handleResetView}>Reset</button>
         <CanvasDraw
           brushRadius={1}
-          brushColor={this.state.color}
+          brushColor="#130f40"
           canvasWidth={500}
           canvasHeight={500}
           catenaryColor="red"
