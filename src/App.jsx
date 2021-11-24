@@ -2,7 +2,7 @@ import { Switch, Route } from "react-router-dom";
 import { ThemeProvider } from "@material-ui/core/styles";
 import { createTheme } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 import "./App.css";
 import {
@@ -43,9 +43,9 @@ import {
 
 function App() {
   const [isLoading, setIsLoading] = useState(false);
-  useEffect(() => {
-    console.log("render");
-  });
+  // useEffect(() => {
+  //   console.log("render");
+  // });
 
     if (isLoading) {
       return (

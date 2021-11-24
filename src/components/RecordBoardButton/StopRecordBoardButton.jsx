@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { withStyles } from "@material-ui/core/styles";
 import { Box, Button } from "@material-ui/core";
 import Typography from '@material-ui/core/Typography';
@@ -48,9 +48,11 @@ export const BoardButton = withStyles({
 })(Button);
 
 
-export function StopRecordBoardButton(props) {
+export function StopRecordBoardButton({onSketchesAdd}) {
   // add hook for button
   const [open, setOpen] = React.useState(false);
+  const [newSketches, setNewSketches] = useState("");
+
   // const [done, setDone] = useState(undefined);
   
   const history = useHistory();
@@ -61,6 +63,21 @@ export function StopRecordBoardButton(props) {
   }
   const handleClickOpen = () => {
     setOpen(true);
+  };
+
+  const handleChange = (event) => {
+    setNewSketches(event.currentTarget.value);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    const id = new Date().getTime();
+    const name = newSketches;
+
+    onSketchesAdd({ id, name });
+
+    setNewSketches("");
   };
 
   return (

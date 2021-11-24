@@ -7,7 +7,7 @@ import {
   FormGroup,
 } from "@material-ui/core";
 import MicNoneOutlinedIcon from "@material-ui/icons/MicNoneOutlined";
-// import MicOffOutlinedIcon from "@material-ui/icons/MicOffOutlined";
+import MicOffOutlinedIcon from "@material-ui/icons/MicOffOutlined";
 import { ThemePaletteColors, StyledSwitchButton } from "..";
 
 
@@ -30,6 +30,16 @@ const useStyles = makeStyles((theme) => ({
     width: 50,
     color: "#95C6B8",
   },
+    MicOn: {
+    height: 50,
+    width: 50,
+    color: "#95C6B8",
+  },
+    MicOff: {
+      height: 50,
+      width: 50,
+      color: theme.palette.secondary,
+    },
 }));
 
 export function MicroLoader() {
@@ -39,7 +49,10 @@ export function MicroLoader() {
 
     const handleChange = (event) => {
       setState({ ...state, [event.target.name]: event.target.checked });
-    };
+      setisToggled(false)
+   };
+    const [isToggled, setisToggled] = React.useState(true);
+   
     const classes = useStyles();
       return (
         <div>
@@ -50,15 +63,12 @@ export function MicroLoader() {
               tooltip="Change the status of the micro"
               variant="raised"
               control={
-                <ThemeProvider theme={ThemePaletteColors}>
-                  <CssBaseline />
                   <StyledSwitchButton
                     checked={state.checkedB}
                     onChange={handleChange}
                     name="checkedB"
                     color="primary"
                   />
-                </ThemeProvider>
               }
             />
             <FormControlLabel
@@ -69,9 +79,21 @@ export function MicroLoader() {
                   tooltip="status of the micro"
                   variant="raised"
                   style={{ backgroundColor: "transparent" }}
+                  checked={isToggled}
+                  label={isToggled ? "camOff" : "camOn"}
                 >
-                  <MicNoneOutlinedIcon className={classes.micro} />
-                  {/* <MicOffOutlinedIcon className={classes.micro} /> */}
+                  {/* <MicNoneOutlinedIcon className={classes.micro} /> */}
+
+                  {/* Ternary operation */}
+                  {/* condition ? “This is True” : “This is False” */}
+                  {isToggled ? (
+                    <MicNoneOutlinedIcon className={classes.MicOn} />
+                  ) : <MicOffOutlinedIcon className={classes.MicOff} /> &&
+                    isToggled ? (
+                    <MicNoneOutlinedIcon className={classes.MicOn} />
+                  ) : (
+                    <MicOffOutlinedIcon className={classes.MicOff} />
+                  )}
                 </IconButton>
               }
             />

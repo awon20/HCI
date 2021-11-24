@@ -55,15 +55,12 @@ export function CameraLoader() {
           tooltip="Change the status of the micro"
           variant="raised"
           control={
-            <ThemeProvider theme={ThemePaletteColors}>
-              <CssBaseline />
               <StyledSwitchButton
                 checked={state.checkedA}
                 onChange={handleChange}
                 name="checkedA"
                 color="primary"
               />
-            </ThemeProvider>
           }
         />
         <FormControlLabel

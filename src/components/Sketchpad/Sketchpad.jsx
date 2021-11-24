@@ -23,7 +23,7 @@ export class Sketchpad extends React.Component {
     this.lineWidthInputValue = undefined;
   }
 
-  onDown = (e) => {
+ onDown = (e) => {
     this.context.activateCanvas();
 
     // Open the onMove mouse event

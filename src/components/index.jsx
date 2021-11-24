@@ -14,7 +14,8 @@ export { StartRecordBoardButton } from "./RecordBoardButton/StartRecordBoardButt
 export { StopRecordBoardButton } from "./RecordBoardButton/StopRecordBoardButton";
 export { CameraMicroBox } from "./CameraMicroBox/CameraMicroBox";
 export { LoadingPage } from "./LoadingPage/LoadingPage";
-export { ToolsBox1, ToolsBox2 } from "./ToolsBox/ToolsBox";
+// export { ToolsBox1, ToolsBox2 } from "./ToolsBox/ToolsBox";
+export { UndoButton, EditButton, EraserButton, ColorsButton, DeleteAllButton, RedoButton} from "./ToolsBox/ToolsBox";
 export { RecordingButton } from "./VideoRecorderComponent/RecordingButton";
 export { RecordingAPI } from "./VideoRecorderComponent/RecordingAPI";
 export { BoardButton } from "./BoardButtonStyles/BoardButtonStyles";
@@ -27,3 +28,4 @@ export { Sketchpad } from "./Sketchpad/Sketchpad";
 export { sketchpadState, SketchpadContext } from "./Sketchpad/SketchContext";
 export { Canvas } from "./SketchCanvas/Canvas"
 export { CanvasProvider } from "./SketchCanvas/CanvasContext"
+export { SketchColors } from "./SketchColors/SketchColors"

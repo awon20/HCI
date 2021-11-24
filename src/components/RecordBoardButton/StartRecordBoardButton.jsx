@@ -46,6 +46,7 @@ const styles = theme => ({
 
 
 export  const StartRecordBoardButton = () =>{
+
   // add hook for button
     const [open, setOpen] = React.useState(false);
 
@@ -82,6 +83,7 @@ export  const StartRecordBoardButton = () =>{
           transitionDuration={500}
           TransitionComponent={Transition}
           keepMounted
+          
         >
           <DialogTitle id="alert-dialog-title">
             {"Ihre Aufzeichnung startet jetzt!"}
