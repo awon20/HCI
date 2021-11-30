@@ -1,6 +1,6 @@
 import {
   makeStyles,
-  ButtonGroup as MaterialButtonGroup
+  ButtonGroup as MaterialButtonGroup,
 } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
@@ -9,9 +9,9 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "row",
     alignItems: "center",
     "& > *:not(:last-child)": {
-      marginRight: theme.spacing(1)
-    }
-  }
+      marginRight: theme.spacing(1),
+    },
+  },
 }));
 
 export const ButtonGroup = ({ children }) => {

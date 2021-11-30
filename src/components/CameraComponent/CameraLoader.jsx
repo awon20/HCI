@@ -1,14 +1,13 @@
 import React, { useState } from "react";
-import { makeStyles, ThemeProvider } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import {
   IconButton,
-  CssBaseline,
   FormControlLabel,
   FormGroup,
 } from "@material-ui/core";
 import VideocamOutlinedIcon from "@material-ui/icons/VideocamOutlined";
 import VideocamOffOutlinedIcon from "@material-ui/icons/VideocamOffOutlined";
-import { ThemePaletteColors, StyledSwitchButton } from "../";
+import { StyledSwitchButton } from "../";
 
 const useStyles = makeStyles((theme) => ({
   controlPosition: {

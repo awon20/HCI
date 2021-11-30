@@ -8,3 +8,4 @@ export { SketchBoardMicOn } from "./SketchBoardPages/SketchBoardMicOn";
 export { SketchBoardCamOffMicOff } from "./SketchBoardPages/SketchBoardCamOffMicOff";
 export { SketchBoardSummary } from "./SketchBoardSummary/SketchBoardSummary";
 export { BoardClosingDialog } from "./BoardClosingDialog/BoardClosingDialog";
+export { SketchBoardSaving } from "./SketchBoardSummary/SketchBoardSaving";

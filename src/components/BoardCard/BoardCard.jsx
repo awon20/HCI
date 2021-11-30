@@ -19,44 +19,6 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     backgroundColor: "#F5F5F5", // whitesmoke
   },
-  // content: {
-  //   alignContent: "center",
-  // },
-  // positionAddButton: {
-  //   display: "flex",
-  //   flexDirection: "column",
-  //   alignItems: "center",
-  //   paddingTop: theme.spacing(1),
-  //   paddingLeft: theme.spacing(4),
-  //   paddingRight: theme.spacing(4),
-  //   paddingBottom: theme.spacing(1),
-  // },
-  // positionText: {
-  //   display: "flex",
-  //   flexDirection: "column",
-  //   alignItems: "center",
-  //   paddingTop: theme.spacing(1),
-  //   paddingLeft: theme.spacing(4),
-  //   paddingRight: theme.spacing(4),
-  //   paddingBottom: theme.spacing(1),
-  // },
-  // positionCamMicro: {
-  //   display: "flex",
-  //   alignItems: "center",
-  //   paddingTop: theme.spacing(1),
-  //   paddingLeft: theme.spacing(4),
-  //   paddingRight: theme.spacing(4),
-  //   paddingBottom: theme.spacing(1),
-  // },
-  // button: {
-  //   background:
-  //     "linear-gradient(45deg, var(--background-start) 30%, var(--background-end) 90%)",
-  //   borderRadius: 3,
-  //   border: 0,
-  //   color: "white",
-  //   height: 48,
-  //   padding: "0 30px",
-  // },
 }));
 
 
@@ -65,13 +27,7 @@ const useStyles = makeStyles((theme) => ({
 export function BoardCard() {
   /* invok the hooks for styles. */
     const classes = useStyles();
-  
-    // const theme = useTheme();
-    //  const [color, setColor] = React.useState(defaultColor);
 
-    //  const handleChange = (event) => {
-    //    setColor(event.target.checked ? greenCyan : defaultColor);
-    //  };
     return (
       <Card 
         elevation={5} 
@@ -80,10 +36,6 @@ export function BoardCard() {
         <Box
           display="flex"
           justifyContent="center"
-          // pt={4}
-          // pr={6}
-          // pb={4}
-          // pl={6}
         >
           <CreateBoard onClick={() => console.log("button clicked!")} />
           {/* <SubmitButton /> */}
@@ -92,10 +44,6 @@ export function BoardCard() {
         <Box
           display="flex"
           justifyContent="center"
-          // pt={4}
-          // pr={6}
-          // pb={4}
-          // pl={6}
         >
           <CardTitle />
         </Box>

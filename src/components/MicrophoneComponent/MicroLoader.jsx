@@ -1,14 +1,13 @@
 import React from 'react'
-import { makeStyles, ThemeProvider } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import {
   IconButton,
-  CssBaseline,
   FormControlLabel,
   FormGroup,
 } from "@material-ui/core";
 import MicNoneOutlinedIcon from "@material-ui/icons/MicNoneOutlined";
 import MicOffOutlinedIcon from "@material-ui/icons/MicOffOutlined";
-import { ThemePaletteColors, StyledSwitchButton } from "..";
+import { StyledSwitchButton } from "..";
 
 
 const useStyles = makeStyles((theme) => ({

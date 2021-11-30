@@ -1,12 +1,10 @@
 import React,  {useRef, useEffect, useState} from "react";
 // import VideoRecorder from "react-video-recorder";
-import clsx from "clsx";
 import { app } from "../../base";
 
 import {
   Grid,
   Box,
-  Button
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import RecordRTC from 'recordrtc';
@@ -24,9 +22,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export function RecordingButton() {
+export function RecordingView() {
 
-const classes = useStyles();
+
 const videoRef = useRef(null);
 const [videos, setSaveVideos] = useState([]);
 
@@ -93,7 +91,6 @@ const startRecord = () => {
             setSaveVideos(tempVideos);
           });    
         return unmount;
-        console.log(unmount)
       } catch (err) {
         console.log(err);
       }
@@ -104,7 +101,7 @@ const startRecord = () => {
   return (
     <Grid container direction="column" alignItems="center">
       <Box display="flex" justifyContent="center">
-          <video ref={videoRef} width="600px" height="500px" controls autoPlay={true} playsInline={true}></video>
+          <video ref={videoRef} width="600px" height="500px" controls autoPlay={false} playsInline={false}></video>
       </Box>
       {/* <Box display="flex" justifyContent="center">
         <Button  className={clsx(classes.styledComponents)} onClick={startRecord}> Start </Button>

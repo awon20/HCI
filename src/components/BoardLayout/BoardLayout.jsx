@@ -1,62 +1,44 @@
-import React, { useState, useRef, useCallback } from "react";
+import React, { useState, useRef } from "react";
+import Container from '@material-ui/core/Container'
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import { Paper, Box, Button } from "@material-ui/core";
-import TextField from '@material-ui/core/TextField';
 import { ButtonGroup } from "./button-group/button-group";
 import {
   Drawer as MUIDrawer,
 } from "@material-ui/core/";
-import { useHistory } from "react-router";
-
+// import { useHistory } from "react-router";
+//-------------- import-components --------------------
 import {
   StartRecordBoardButton,
   StopRecordBoardButton,
   CameraMicroBox,
-  RecordingButton,
-  ToolsBox1, 
+  RecordingView,
   UndoButton,
-  EditButton,
   EraserButton,
-  ColorsButton,
-  DeleteAllButton,
-  RedoButton, 
-  SketchColors
-  // Canvas,
-  // RecordingAPI,
-  // CanvasProvider
+  RedoButton,
 } from "../../components";
 //-------------- drowing-component --------------------
 import CanvasDraw from "react-canvas-draw";
 //-------------- Tools-component --------------------
-import { Icon } from "@iconify/react";
-import eraserIcon from "@iconify-icons/mdi/eraser";
-import {
-  MdEdit,
-  MdCrop,
-  MdColorLens,
-  MdDelete,
-} from "react-icons/md";
-import UndoIcon from "@material-ui/icons/Undo";
-import RedoIcon from "@material-ui/icons/Redo";
 import BottomNavigation from "@material-ui/core/BottomNavigation";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
-import ColorPicker from 'material-ui-color-picker'
+
 
 
 //-------------- get firebase-configuration --------------------
-import { app } from "../../base"
-import firebase from 'firebase'
-const db = app.firestore();
-const storage = app.storage();
+// import { app } from "../../base"
+// import firebase from 'firebase'
+// const db = app.firestore();
+// const storage = app.storage();
 
+/**
+* TODO: refactoring this component so that is conform to react specifications
+ */
 
 const drawerWidth = 690;
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    display: "flex",
-  },
   appBar: {
     zIndex: theme.zIndex.drawer + 0,
   },
@@ -124,96 +106,29 @@ const colors = ["Black", "Green", "Yellow", "Blue", "Red", "Brown","Orange","Pur
 
 const lineWidths = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
-export function BoardLayout({currentSketch}) {
+
+export function BoardLayout(props) {
+  // console.log(props)
   // eslint-disable-next-line no-lone-blocks
   {
     /* Hook functions */
-  }
+  } 
   const classes = useStyles();
-  const history = useHistory();
   const canvasRef = useRef(null);
-  const canvasRefSave = useRef(null);
   const [value, setValue] = useState(1);
-  const [sketches, setSketches] = useState([]);
   const [selectedColor, setSelectedColor] = useState(colors[0]);
   const [selectedLineWidth, setSelectedLineWidth] = useState(lineWidths[4]);
-  // const { lines, setLines } = useState(
-  //         { past:    [0], 
-  //           present: [0], 
-  //           future:  [0] 
-  //         })
 
-
-
-  const handleClear =  () => {
+  const handleClear = () => {
     canvasRef.current.clear();
-  }
+  };
 
   const handleUndo = () => {
     canvasRef.current.undo();
-  }
-
-  // const clearExceptErasedLines= () =>{
-
-  // }
-  // const simulateDrawingLines = () => {
-
-  // }
-  // const triggerOnChange = () => {
-
-  // }
-  // const handleRedo = () => {
-  //   const lines = canvasRef.current.lines;
-  //   const next = lines[0]
-  //   const newFuture = future.slice(1)
-  //   return {
-  //         past: [...past, present],
-  //         present: next,
-  //         future: newFuture
-  //   }
-  // }
-
-  const handleClearAll = () => {
-    canvasRef.current.eraseAll();
-  }
-  const handleResetView = () => {
-    canvasRef.current.resetView();
-  }
-
-  const handleAdd = (sketch) => {
-    const updatedSketches = [...sketches];
-    updatedSketches.push(sketch);
-
-    setSketches(updatedSketches);
   };
-  // const downloadCanvas = (e) => {
-  //   e.preventDefault();
-  //   history.push("sketchboard-summary");
-  // };
-  // const SaveCanvas = () => {
-  //   return canvasData
-  //   // canvasRefSave.current.loadSaveData(canvasData);
-  // }
-  const onUploadCanvas = async () => {
-    // -----------------------upload json-points to storage ---------------------------
-    const image = canvasRef.current.getDataURL("image/svg");
-    const blob = await (await fetch(image)).blob();
-    const storageRef = storage.ref();
-    const sketchesRef = storageRef.child("sketching/" + new Date());
-    // Create the file metadata
-    var metadata = {
-      contentType: 'image/jpeg'
-    };
-    console.log(image);
-    return sketchesRef.put(blob, metadata).then(() => {
-      console.log("Uploaded a raw svg!");
-    });
-  };
-
-
 
   return (
-    <div className={classes.root}>
+    <Container size="sm">
       <MUIDrawer
         className={classes.drawer}
         variant="permanent"
@@ -221,21 +136,6 @@ export function BoardLayout({currentSketch}) {
         classes={{ paper: classes.drawerPaper }}
         // variant="persistent"
       >
-        {/* Control theme color  */}
-        {/* <Box
-            className={clsx(
-              classes.styledComponents,
-              classes.BtnStartSketchRec
-            )}
-          >
-            <FormControlLabel
-              control={
-                <SwitchUI checked={isDark} onChange={handleThemeChange} />
-              }
-              label="Theme"
-            />
-          </Box> */}
-
         {/* Control SideBar Button */}
         <div>
           <Box
@@ -243,19 +143,26 @@ export function BoardLayout({currentSketch}) {
               classes.styledComponents,
               classes.BtnStartSketchRec
             )}
+            sx={{ m: 2 }}
           >
             {/* SketchBoard Start recording from components RecordBoardButton */}
-            <StartRecordBoardButton onClick={e=> console.log("start")}/>
+            <StartRecordBoardButton onClick={(e) => console.log("start")} />
           </Box>
         </div>
         <div>
-          <Box className={clsx(classes.styledComponents, classes.contentAlign)}>
+          <Box
+            className={clsx(classes.styledComponents, classes.contentAlign)}
+            sx={{ m: 2 }}
+          >
             {/* RecordView for Video from components VideoRecorderComponent  */}
-            <RecordingButton />
+            <RecordingView />
           </Box>
         </div>
         <div>
-          <Box className={clsx(classes.styledComponents, classes.contentAlign)}>
+          <Box
+            className={clsx(classes.styledComponents, classes.contentAlign)}
+            sx={{ m: 2 }}
+          >
             <Paper elevation={1}>
               {/* Camera and Micro from components CameraMicroBox*/}
               <CameraMicroBox />
@@ -263,130 +170,110 @@ export function BoardLayout({currentSketch}) {
           </Box>
         </div>
         <div>
-          <Box className={clsx(classes.styledComponents, classes.contentAlign)}>
+          <Box
+            className={clsx(classes.styledComponents, classes.contentAlign)}
+            sx={{ m: 2 }}
+          >
             <Paper elevation={1}>
               {/* Utils Lists from components ToolsBox */}
-                <BottomNavigation
-                  value={value}
-                  onChange={(event, value) => {
-                    setValue(value);
-                  }}
-                  className={classes.toolsStyles}
-                >
-              <BottomNavigationAction 
-                  label="undo" 
-                  value="undo" 
-                  onClick={handleUndo} 
-                  icon={<UndoButton  />} 
-              />
-              <BottomNavigationAction 
-                label="edit" 
-                value="edit" 
-                icon={<EditButton />} 
-              />
-              <BottomNavigationAction
-                label="eraser"
-                value="eraser"
-                // ToDo
-                onClick = {handleClear}
-                icon={<EraserButton  />}
-              />
-              {/* <BottomNavigationAction 
-                label="cut" 
-                value="cut" 
-                icon={<MdCrop />} 
-              /> */}
-              {/* <BottomNavigationAction 
-                label="cut" 
-                value="cut" 
-                icon={<SketchColors />} 
-              /> */}
-              <ButtonGroup>
-              <Button>
-              <label>Colors:</label>
-               <select
-                  value={selectedColor}
-                  onChange={(e) => setSelectedColor(e.target.value)}
-                >
-                  {colors.map((color) => (
-                    <option key={color} value={color}>
-                      {color}
-                    </option>
-                  ))}
-                </select>
-            </Button>
-            <br/>
-            <Button>
-              <label>Brush-Radius:</label>
-              <select
-                value={selectedLineWidth}
-                onChange={(e) => setSelectedLineWidth(e.target.value)}
+              <BottomNavigation
+                value={value}
+                onChange={(event, value) => {
+                  setValue(value);
+                }}
+                className={classes.toolsStyles}
               >
-                {lineWidths.map((line) => (
-                  <option key={line} value={line}>
-                    {line}
-                  </option>
-                ))}
-              </select>
-            </Button>
-            </ButtonGroup>
-              
-              {/* <BottomNavigationAction
-                label="delete"
-                value="delete"
-                onClick={handleClear}
-                icon={<DeleteAllButton  />}
-              /> */}
-              <BottomNavigationAction 
-                label="redo" 
-                value="redo" 
-                // ToDo
-                onClick = {e => console.log(e.target.value)}
-                icon={<RedoButton />} 
-              />
-            </BottomNavigation>
+                <BottomNavigationAction
+                  label="undo"
+                  value="undo"
+                  onClick={handleUndo}
+                  icon={<UndoButton />}
+                />
+                <BottomNavigationAction
+                  label="eraser"
+                  value="eraser"
+                  // ToDo
+                  onClick={handleClear}
+                  icon={<EraserButton />}
+                />
+                <ButtonGroup>
+                  <Button>
+                    <label>Colors:</label>
+                    <select
+                      value={selectedColor}
+                      onChange={(e) => setSelectedColor(e.target.value)}
+                    >
+                      {colors.map((color) => (
+                        <option key={color} value={color}>
+                          {color}
+                        </option>
+                      ))}
+                    </select>
+                  </Button>
+                  <br />
+                  <Button>
+                    <label>Brush-Radius:</label>
+                    <select
+                      value={selectedLineWidth}
+                      onChange={(e) => setSelectedLineWidth(e.target.value)}
+                    >
+                      {lineWidths.map((line) => (
+                        <option key={line} value={line}>
+                          {line}
+                        </option>
+                      ))}
+                    </select>
+                  </Button>
+                </ButtonGroup>
+                <BottomNavigationAction
+                  label="redo"
+                  value="redo"
+                  // ToDo
+                  onClick={(e) => console.log(e.target.value)}
+                  icon={<RedoButton />}
+                />
+              </BottomNavigation>
             </Paper>
           </Box>
         </div>
         <div>
-          <Box className={clsx(classes.styledComponents, classes.BtnStopSketchRec)}>
-            {/* SketchBoard Stop recording from components RecordBoardButton */}
-            <StopRecordBoardButton
-              // onClick={downloadCanvas}
-            ></StopRecordBoardButton>
-          </Box>
-        </div>
-        <div>
-            <Box display="flex" justifyContent="center">
-                <Button onClick={onUploadCanvas}>SaveCanvas</Button>
-            </Box>
-        </div>
-        <div>
-        <Box display="flex" justifyContent="center">
-          <form className={classes.textFieldStyle} noValidate autoComplete="off">
-            <TextField id="outlined-basic" required label="Name" variant="outlined" />
-            <TextField id="outlined-basic" required label="Sketchname" variant="outlined" />
-          </form>
+          <Box
+            className={clsx(classes.styledComponents, classes.BtnStopSketchRec)}
+            sx={{ m: 2 }}
+          >
+            {/* saving Sketch and Recording on Firebase  */}
+            <StopRecordBoardButton canvasRef={canvasRef} />
           </Box>
         </div>
       </MUIDrawer>
 
       {/** Drawing Area */}
       <div className={classes.content}>
-        <CanvasDraw
-          brushRadius={selectedLineWidth}
-          brushColor={selectedColor}   
-          catenaryColor={selectedColor}   
-          canvasWidth={1872}
-          canvasHeight={1360}
-          hideGrid={true}
-          enablePanAndZoom={true}
-          style={{ border: "1px solid #000" }}
-          ref={canvasRef}
-          loadTimeOffset={10}
-        />
+          <CanvasDraw
+              brushRadius={selectedLineWidth}
+              brushColor={selectedColor}
+              catenaryColor={selectedColor}
+              canvasWidth={1872}
+              canvasHeight={1360}
+              hideGrid={true}
+              enablePanAndZoom={true}
+              style={{ border: "1px solid #000" }}
+              ref={canvasRef}
+              loadTimeOffset={10}
+          />
       </div>
-      {/* <div className={classes.page}>{children}</div> */}
-    </div>
+    </Container>
   );
 }
+// export const DisplayAllProps = (props) => (
+//   <table>
+//     <tbody>
+//       {Array.from(Object.entries(props)).map(([key, value]) => (
+//         <tr key={key + Math.random()}>
+//           <td>{key}</td>
+//           <td>{value}</td>
+//         </tr>
+//       ))}
+//     </tbody>
+//   </table>
+// );

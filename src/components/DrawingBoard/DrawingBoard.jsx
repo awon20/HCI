@@ -8,7 +8,7 @@ import {
   StartRecordBoardButton,
   StopRecordBoardButton,
   CameraMicroBox,
-  RecordingButton,
+  RecordingView,
 } from "../../components";
 import { SwitchTools } from "../DrawingCanvas/SwitchDrawingTools";
 import {
@@ -104,7 +104,7 @@ export function DrawingBoard() {
     return () => {
       context.clearRect(0, 0, canvas.width, canvas.height);
     };
-  }, [popped, elements, path, width]);
+  }, [popped, elements, path, width, toolType, shapeWidth]);
 
   const updateElement = (
     index,
@@ -347,7 +347,7 @@ export function DrawingBoard() {
           >
             <Box p={1}>
               {/* RecordView for Video from components VideoRecorderComponent  */}
-              <RecordingButton />
+              <RecordingView />
               {/* <RecordingAPI /> */}
             </Box>
           </Paper>

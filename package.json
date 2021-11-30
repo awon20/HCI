@@ -17,7 +17,6 @@
     "firebase-tools": "^8.10.0",
     "iotcomms-react-webrtc": "^1.0.9",
     "material-ui-color-picker": "^3.5.1",
-    "node-sass": "^4.14.1",
     "react": "^16.6.3",
     "react-canvas-draw": "^1.2.1",
     "react-color-palette": "^6.1.0",

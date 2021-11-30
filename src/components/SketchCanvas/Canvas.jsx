@@ -12,7 +12,7 @@ export function Canvas() {
 
   useLayoutEffect(() => {
     prepareCanvas();
-  }, []);
+  }, [prepareCanvas]);
 
   return (
     <div>
