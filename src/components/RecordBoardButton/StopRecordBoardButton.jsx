@@ -111,11 +111,11 @@ export function StopRecordBoardButton(props) {
       setSketchnameError(true)
     }
     if (username && sketchname) {
-      fetch('http://localhost:8000/notes', {
+      fetch('http://localhost:8000/sketches', {
         method: 'POST',
         headers: {"Content-type": "application/json"},
         body: JSON.stringify({ username, sketchname })
-      }).then(() => history.push('/'))
+      }).then(() => history.push('/sketchboard-summary'))
     } 
   }
   

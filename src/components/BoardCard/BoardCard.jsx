@@ -22,8 +22,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-
-
 export function BoardCard() {
   /* invok the hooks for styles. */
     const classes = useStyles();
