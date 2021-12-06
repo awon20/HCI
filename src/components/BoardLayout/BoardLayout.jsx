@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Container from '@material-ui/core/Container'
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
@@ -8,6 +8,7 @@ import {
   Drawer as MUIDrawer,
 } from "@material-ui/core/";
 // import { useHistory } from "react-router";
+import { AddValue } from "./AddValue"
 //-------------- import-components --------------------
 import {
   StartRecordBoardButton,
@@ -18,24 +19,20 @@ import {
   EraserButton,
   RedoButton,
 } from "../../components";
+// import ReactLocalStorageCache from "./ReactLocalStorageCache";
 //-------------- drowing-component --------------------
 import CanvasDraw from "react-canvas-draw";
 //-------------- Tools-component --------------------
 import BottomNavigation from "@material-ui/core/BottomNavigation";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
+import TextField from "@material-ui/core/TextField";
+
 
 
 
 //-------------- get firebase-configuration --------------------
-// import { app } from "../../base"
-// import firebase from 'firebase'
-// const db = app.firestore();
-// const storage = app.storage();
-
-/**
-* TODO: refactoring this component so that is conform to react specifications
- */
-
+import { app } from "../../services/base"
+import firebase from "firebase";
 const drawerWidth = 690;
 
 const useStyles = makeStyles((theme) => ({
@@ -106,18 +103,26 @@ const colors = ["Black", "Green", "Yellow", "Blue", "Red", "Brown","Orange","Pur
 
 const lineWidths = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
-
-export function BoardLayout(props) {
+export function BoardLayout() {
   // console.log(props)
   // eslint-disable-next-line no-lone-blocks
-  {
-    /* Hook functions */
-  } 
+
+  /* Hook functions */
   const classes = useStyles();
   const canvasRef = useRef(null);
   const [value, setValue] = useState(1);
   const [selectedColor, setSelectedColor] = useState(colors[0]);
   const [selectedLineWidth, setSelectedLineWidth] = useState(lineWidths[4]);
+  const [username, setUsername] = React.useState("");
+  const [sketchName, setSketchName] = React.useState("");
+  const [usernameError, setUsernameError] = useState(false);
+  const [sketchNameError, setSketchNameError] = useState(false);
+  const [urlSketch, setUrlSketch] = useState("");
+  const [sketchesTime, setSketchesTime] = useState("");
+
+  //-------------- get firebase-storage and firestore-API --------------------
+  const db = app.firestore();
+  const storage = app.storage();
 
   const handleClear = () => {
     canvasRef.current.clear();
@@ -126,6 +131,142 @@ export function BoardLayout(props) {
   const handleUndo = () => {
     canvasRef.current.undo();
   };
+
+  // const saveCanvas = () => {
+  //   canvasRef.current.getSaveData();
+  //   alert("DataURL written to console");
+  // };
+
+  // ----------------------- setusername on firestore  ---------------------------
+  const getUserName = (e) => {
+    setUsername(e.target.value);
+  };
+
+  // ----------------------- setsketchname on firestore  ---------------------------
+  const getSketchName = (e) => {
+    setSketchName(e.target.value);
+  };
+
+  // -----------------------upload images as svg to the storage ---------------------------
+  const onUploadCanvas = async (e) => {
+    e.preventDefault();
+    setUsernameError(false);
+    setSketchNameError(false);
+    setSketchesTime();
+
+    if (username === "") {
+      setUsernameError(true);
+    }
+    if (sketchName === "") {
+      setSketchNameError(true);
+    }
+    if (!username && !sketchName) {
+      return;
+    }
+    // Sending File to Firebase Storage
+    const image = canvasRef.current.getDataURL();
+    const blob = await (await fetch(image)).blob();
+    const storageRef = storage.ref();
+    // const sketchesRef = storageRef.child("sketching/" + sketchName);
+    // Create the file metadata
+    var metadata = {
+      contentType: "image/png",
+    };
+    // Upload file and metadata to the object 'sketching'
+    var uploadTask = storageRef
+      .child("sketching/" + sketchName)
+      .put(blob, metadata);
+    // Listen for state changes, errors, and completion of the upload.
+    uploadTask.on(
+      firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
+      (snapshot) => {
+        // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+        var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        console.log("Sketch Upload is " + progress + "% done");
+        switch (snapshot.state) {
+          case firebase.storage.TaskState.PAUSED: // or 'paused'
+            console.log(" Sketch Upload is paused");
+            break;
+          case firebase.storage.TaskState.RUNNING: // or 'running'
+            console.log("Sketch Upload is running");
+            break;
+          default:
+            console.log("Sketch Upload is now running");
+        }
+      },
+      (error) => {
+        // A full list of error codes is available at
+        // https://firebase.google.com/docs/storage/web/handle-errors
+        switch (error.code) {
+          case "storage/unauthorized":
+            // User doesn't have permission to access the object
+            break;
+          case "storage/canceled":
+            // User canceled the upload
+            break;
+          case "storage/unknown":
+            // Unknown error occurred, inspect error.serverResponse
+            break;
+          default:
+            console.log("Sketch Upload is no running");
+        }
+      },
+      () => {
+        // Upload completed successfully, now we can get the download URL
+        uploadTask.snapshot.ref.getDownloadURL().then(
+          (downloadURL) => {
+            db.collection("Sketching")
+              .doc(username, sketchName, urlSketch, sketchesTime)
+              .set({
+                username: username,
+                sketchName: sketchName,
+                urlSketch: downloadURL,
+                sketchesTime: firebase.firestore.FieldValue.serverTimestamp().toDate().toDateString(),
+              })
+              .then(function () {
+                console.log("UsersData successfully written!");
+              })
+              .catch(function (error) {
+                console.error("Error writing UsersData: ", error);
+              });
+            // setUrlSketch(downloadURL);
+            console.log(downloadURL);
+          },
+          (error) => {
+            // failed to get download URL
+            console.log(error);
+          }
+        );
+      }
+    );
+    // if (username && sketchName) {
+    //   fetch("http://localhost:8000/Sketching", {
+    //     method: "POST",
+    //     headers: { "Content-type": "application/json" },
+    //     body: JSON.stringify({ username, sketchName, urlSketch }),
+    //   });
+    // }
+  };
+  // const onSketchesCreate = (e) => {
+  //   if (!username && sketchName) {
+  //     return;
+  //   }
+  //   db.collection("Sketching")
+  //     .doc(username, sketchName, urlSketch, sketchesTime)
+  //     .set({
+  //       username: username,
+  //       sketchName: sketchName,
+  //       urlSketch: "",
+  //       sketchesTime: firebase.firestore.FieldValue.serverTimestamp(),
+  //     })
+  //     .then(function () {
+  //       console.log("UsersData successfully written!");
+  //     })
+  //     .catch(function (error) {
+  //       console.error("Error writing UsersData: ", error);
+  //     });
+  //     e.preventDefault();
+  //   };
 
   return (
     <Container size="sm">
@@ -237,30 +378,75 @@ export function BoardLayout(props) {
           </Box>
         </div>
         <div>
+          <Box sx={{ m: 2 }} display="flex" justifyContent="center">
+            <AddValue />
+          </Box>
+
           <Box
-            className={clsx(classes.styledComponents, classes.BtnStopSketchRec)}
-            sx={{ m: 2 }}
+            sx={{ m: 10 }}
+            // display="flex"
+            // justifyContent="center"
+            // className={clsx(classes.styledComponents, classes.BtnStopSketchRec)}
           >
+            <form
+              noValidate
+              autoComplete="off"
+              onSubmit={(e) => onUploadCanvas(e)}
+            >
+              <TextField
+                className={classes.textFieldStyle}
+                value={username}
+                onChange={getUserName}
+                onBlur={getUserName}
+                id="outlined-basic"
+                type="text"
+                required
+                label="Username"
+                variant="outlined"
+                inputProps={{
+                  maxLength: 32,
+                }}
+                error={usernameError}
+              />
+              <TextField
+                className={classes.textFieldStyle}
+                id="outlined-basic"
+                value={sketchName}
+                onChange={getSketchName}
+                onBlur={getSketchName}
+                required
+                label="Sketchname"
+                fullWidth
+                variant="outlined"
+                inputProps={{
+                  maxLength: 32,
+                }}
+                error={sketchNameError}
+              />
+            </form>
             {/* saving Sketch and Recording on Firebase  */}
-            <StopRecordBoardButton canvasRef={canvasRef} />
+            <StopRecordBoardButton
+              uploadSketch={(e) => onUploadCanvas(e)}
+              // saveCanvas={() => saveCanvas()}
+            />
           </Box>
         </div>
       </MUIDrawer>
 
       {/** Drawing Area */}
       <div className={classes.content}>
-          <CanvasDraw
-              brushRadius={selectedLineWidth}
-              brushColor={selectedColor}
-              catenaryColor={selectedColor}
-              canvasWidth={1872}
-              canvasHeight={1360}
-              hideGrid={true}
-              enablePanAndZoom={true}
-              style={{ border: "1px solid #000" }}
-              ref={canvasRef}
-              loadTimeOffset={10}
-          />
+        <CanvasDraw
+          brushRadius={selectedLineWidth}
+          brushColor={selectedColor}
+          catenaryColor={selectedColor}
+          canvasWidth={1872}
+          canvasHeight={1360}
+          hideGrid={true}
+          enablePanAndZoom={true}
+          style={{ border: "1px solid #000" }}
+          ref={canvasRef}
+          loadTimeOffset={10}
+        />
       </div>
     </Container>
   );

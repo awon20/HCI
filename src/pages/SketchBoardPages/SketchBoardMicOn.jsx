@@ -1,19 +1,12 @@
 import React from 'react';
+import Container from "@material-ui/core/Container";
 
 import { BoardLayout } from "../../components";
-import { makeStyles } from "@material-ui/core/styles";
-
-const useStyles = makeStyles({
-  container: {
-    display: 'flex',
-  }
-});
 
 export function SketchBoardMicOn() {
-  const classes = useStyles();
   return (
-    <div className={classes.container}>
+    <Container>
       <BoardLayout />
-    </div>
+    </Container>
   );
 }

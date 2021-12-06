@@ -1,6 +1,6 @@
 import React,  {useRef, useEffect, useState} from "react";
 // import VideoRecorder from "react-video-recorder";
-import { app } from "../../base";
+import { app } from "../../services/base";
 
 import {
   Grid,

@@ -4,7 +4,6 @@ import Drawer from "@material-ui/core/Drawer";
 import CssBaseline from "@material-ui/core/CssBaseline";
 //-------------- drowing-component --------------------
 import CanvasDraw from "react-canvas-draw";
-import { Button } from "@material-ui/core";
 
 const drawerWidth = 690;
 

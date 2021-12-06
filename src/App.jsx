@@ -80,12 +80,8 @@ function App() {
           <Route path="/sketchboard-cam-off-mic-off">
             <SketchBoardCamOffMicOff />
           </Route>
-          <Route path="/sketchboard-summary">
-            <SketchBoardSummary />
-          </Route>
-          <Route path="/sketchboard-saving">
-            <SketchBoardSaving />
-          </Route>
+          <Route path="/:sketch" component={SketchBoardSummary}/>
+          <Route path="/:sketchboard-saving" component={SketchBoardSaving}  />
         </Switch>
       </ThemeProvider>
     </div>

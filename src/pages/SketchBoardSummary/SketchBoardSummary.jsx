@@ -1,21 +1,14 @@
 import React from "react";
 import Grid from '@material-ui/core/Grid';
-import { makeStyles } from "@material-ui/core/styles";
-
+import Container from '@material-ui/core/Container'
 import { BoardCard } from "../../components";
 import SummeryBoardCard from "./SummaryBoardCard";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-    
-  },
-}));
 export function SketchBoardSummary() {
-    const classes = useStyles();
+
 
   return (
-    <div className={classes.root}>
+    <Container size="sm">
       <Grid
         container
         spacing={3}
@@ -24,13 +17,13 @@ export function SketchBoardSummary() {
         justifyContent="center"
         style={{ minHeight: "100vh" }}
       >
-        <Grid item xs={3}>
+        <Grid item xs={12} md={6} lg={4}>
           <BoardCard />
         </Grid>
-        <Grid item xs={3}>
+        <Grid item xs={12} md={6} lg={4}>
           <SummeryBoardCard />
         </Grid>
       </Grid>
-    </div>
+    </Container>
   );
 }

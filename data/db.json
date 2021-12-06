@@ -1,19 +1,16 @@
 {
-    "sketches": [
-      {
-        "name": "Yoshi's birthday bash",
-        "sketchname": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-        "id": 1
-      },
-      {
-        "name": "Yoshi's birthday bash",
-        "sketchname": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-        "id": 2
-      },
-      {
-        "name": "Yoshi's birthday bash",
-        "sketchname": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-        "id": 3
-      }
-    ]
+  "Sketching": [
+    {
+      "username": "TEst19",
+      "sketchname": "Testing19",
+      "urlSketch": "",
+      "id": 1
+    },
+    {
+      "username": "Test1",
+      "sketchName": "TestSketching1",
+      "urlSketch": "",
+      "id": 2
+    }
+  ]
 }

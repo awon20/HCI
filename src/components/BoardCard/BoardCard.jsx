@@ -26,7 +26,8 @@ export function BoardCard() {
   /* invok the hooks for styles. */
     const classes = useStyles();
 
-    return (
+    return ( 
+      <div>
       <Card 
         elevation={5} 
         className={classes.root}>
@@ -35,7 +36,7 @@ export function BoardCard() {
           display="flex"
           justifyContent="center"
         >
-          <CreateBoard onClick={() => console.log("button clicked!")} />
+          <CreateBoard  />
           {/* <SubmitButton /> */}
         </Box>
         {/* Card title */}
@@ -46,9 +47,10 @@ export function BoardCard() {
           <CardTitle />
         </Box>
         {/* Camera MicrophoneComponent  */}
-        <Box display="flex" justifyContent="center" pt={4} pr={6} pb={4} pl={6}>
+        <Box display="flex" justifyContent="center" >
           <CameraMicroBox />
         </Box>
       </Card>
+      </div>
     );
 }
