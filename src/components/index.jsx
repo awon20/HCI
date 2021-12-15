@@ -21,9 +21,7 @@ export { ThemePaletteColors } from "./ThemePaletteColors/ThemePaletteColors";
 export { StyledSwitchButton } from "./StyledSwitchButtons/StyledSwitchButtons";
 export { ToggleSwitchCamera } from "./ToggleSwitchCamera/ToggleSwitchCamera";
 export { CustomThemeContext } from "./CustomThemeProvider/CustomThemeProvider";
-export { DrawingBoard } from "./DrawingBoard/DrawingBoard";
-export { Sketchpad } from "./Sketchpad/Sketchpad";
-export { sketchpadState, SketchpadContext } from "./Sketchpad/SketchContext";
 export { Canvas } from "./SketchCanvas/Canvas"
 export { CanvasProvider } from "./SketchCanvas/CanvasContext"
 export { SketchColors } from "./SketchColors/SketchColors"
+export { SketchBoardEditing } from "./SketchBoardEditing/SketchBoardEditing";

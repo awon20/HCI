@@ -6,8 +6,9 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
 import { Link } from "react-router-dom";
 import Container from "@material-ui/core/Container";
-import Grid from "@material-ui/core/Grid";
-import CardSketches from "./CardSketches";
+import { Divider } from "@material-ui/core/";
+
+
 import { useGetData } from "../../hooks/useGetData";
 
 
@@ -17,10 +18,11 @@ const useStyles = makeStyles({
     minWidth: 350,
     minHeight: 350,
     display: "inherit",
-    alignItems: "center",  
+    alignItems: "center",
   },
   media: {
-    height: 280,
+    width:  350,
+    height: 250,
   },
 });
 
@@ -28,39 +30,27 @@ const useStyles = makeStyles({
 export default function SummaryBoardCard() {
   const classes = useStyles();
   const [userSketchData] = useGetData();
-  for (var i = 0; i < userSketchData.length; i++) {
-    if (userSketchData[i].id === "") {
-      return userSketchData[i];
-    }
-  }
-  // const userData =  userSketchData[Object.keys(userSketchData)[0]];
-  // console.log(userData);
-  //  const match = useRouteMatch("/:sketch");
-  //  const { sketch } = match.params;
+  const SketchData = userSketchData.slice(-1);
+  const sortedSketchData = SketchData.slice().sort(
+    (a, b) => b.value.createdAt - a.value.createdAt
+  );
+  
+ 
+  // console.time("array length property");
+  // let lastElement = userSketchData[userSketchData.length - 1];
+  // console.log(lastElement);
+  // console.timeEnd("array length property");
 
-  // useEffect(() => {
-  //   const fetchUsersData = async () => {
-  //     const usersCollections = await db.collection("Sketching").get();
-  //       setUsersData(
-  //         usersCollections.docs.map((doc) => {
-  //           // console.log(doc.data())
-  //           return doc.data();
-  //         })
-  //       );
-  //   };
-  //   fetchUsersData();
-   
-  // }, [usersData]);
-  // useEffect(() => {
-  //   const fetchUsersData = async () => {
-  //     db.collection("Sketching")
-  //       .doc()
-  //       .onSnapshot((doc) => {
-  //         setImagesUrl(doc.data().imagesUrl || []);
-  //         setUsersData(doc.data().username);
-  //       });
-  //   };
-  //   // console.log(usersData[0]);
+  // console.time("array slice method");
+  // let lastElement1 = userSketchData.slice(-1);
+  // console.log(lastElement1);
+  // console.timeEnd("array slice method");
+
+  // console.time("array pop method");
+  // let lastElement2 = userSketchData.pop();
+  // console.log(lastElement2);
+  // console.timeEnd("array pop method");
+
   //   fetchUsersData();  
   // }, [usersData]);
   // useEffect(() => {
@@ -72,23 +62,25 @@ export default function SummaryBoardCard() {
   return (
     <Container>
       <Card className={classes.root} elevation={5}>
-        { userSketchData[i] && userSketchData[i].map(({ id, value }) => (
+        {sortedSketchData &&
+          sortedSketchData.map(({ id, value }) => (
             <CardActionArea component={Link} to="/sketchboard-saving" key={id}>
               <CardMedia
                 component="img"
                 className={classes.media}
-                image={value.urlSketch || "http://via.placeholder.com/280x200"}
-                title="sketch"
-                height="280"
-                width="200"
+                image={value.urlSketch || "http://via.placeholder.com/350x350"}
+                title="sketch-summary"
+                height="350"
+                width="350"
               />
+              <Divider />
               <CardContent>
                 <Typography gutterBottom variant="h5" component="h2">
                   {value.sketchName}
                 </Typography>
                 <Typography variant="body2" color="textSecondary" component="p">
                   Erstellt vom {value.username} am{" "}
-                  {/* {value.sketchesTime.toDate().toDateString()} */}
+                  {value.createdAt.toDate().toLocaleString("de-DE")}
                 </Typography>
               </CardContent>
             </CardActionArea>
@@ -96,4 +88,4 @@ export default function SummaryBoardCard() {
       </Card>
     </Container>
   );
-}
+};

@@ -13,7 +13,7 @@ import {
   SketchBoardCamOffMicOff,
   SketchBoardSummary,
   LoadingSpinner,
-  SketchBoardSaving,
+  SketchBoardEditingPage,
 } from "./pages";
 
 /*This  component Providing the colors directly for the all App*/
@@ -80,8 +80,11 @@ function App() {
           <Route path="/sketchboard-cam-off-mic-off">
             <SketchBoardCamOffMicOff />
           </Route>
-          <Route path="/:sketch" component={SketchBoardSummary}/>
-          <Route path="/:sketchboard-saving" component={SketchBoardSaving}  />
+          <Route path="/sketchboard-summary" component={SketchBoardSummary} />
+          <Route
+            path="/sketchboard-saving"
+            component={SketchBoardEditingPage}
+          />
         </Switch>
       </ThemeProvider>
     </div>

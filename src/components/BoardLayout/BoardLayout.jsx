@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import Container from '@material-ui/core/Container'
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
@@ -8,7 +8,7 @@ import {
   Drawer as MUIDrawer,
 } from "@material-ui/core/";
 // import { useHistory } from "react-router";
-import { AddValue } from "./AddValue"
+
 //-------------- import-components --------------------
 import {
   StartRecordBoardButton,
@@ -26,9 +26,6 @@ import CanvasDraw from "react-canvas-draw";
 import BottomNavigation from "@material-ui/core/BottomNavigation";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
 import TextField from "@material-ui/core/TextField";
-
-
-
 
 //-------------- get firebase-configuration --------------------
 import { app } from "../../services/base"
@@ -104,7 +101,6 @@ const colors = ["Black", "Green", "Yellow", "Blue", "Red", "Brown","Orange","Pur
 const lineWidths = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 export function BoardLayout() {
-  // console.log(props)
   // eslint-disable-next-line no-lone-blocks
 
   /* Hook functions */
@@ -132,11 +128,9 @@ export function BoardLayout() {
     canvasRef.current.undo();
   };
 
-  // const saveCanvas = () => {
-  //   canvasRef.current.getSaveData();
-  //   alert("DataURL written to console");
-  // };
-
+  // const saveSketchLocal= () => {
+  //   localStorage.setItem("savedDrawing", canvasRef.current.getSaveData());
+  // }
   // ----------------------- setusername on firestore  ---------------------------
   const getUserName = (e) => {
     setUsername(e.target.value);
@@ -174,7 +168,7 @@ export function BoardLayout() {
     };
     // Upload file and metadata to the object 'sketching'
     var uploadTask = storageRef
-      .child("sketching/" + sketchName)
+      .child("sketching/" + sketchName + ".png" )
       .put(blob, metadata);
     // Listen for state changes, errors, and completion of the upload.
     uploadTask.on(
@@ -220,8 +214,8 @@ export function BoardLayout() {
               .set({
                 username: username,
                 sketchName: sketchName,
-                urlSketch: downloadURL,
-                sketchesTime: firebase.firestore.FieldValue.serverTimestamp().toDate().toDateString(),
+                urlSketch: downloadURL + ".png",
+                createdAt: firebase.firestore.FieldValue.serverTimestamp(),
               })
               .then(function () {
                 console.log("UsersData successfully written!");
@@ -229,8 +223,8 @@ export function BoardLayout() {
               .catch(function (error) {
                 console.error("Error writing UsersData: ", error);
               });
-            // setUrlSketch(downloadURL);
-            console.log(downloadURL);
+              setUrlSketch(downloadURL);
+            // console.log(downloadURL);
           },
           (error) => {
             // failed to get download URL
@@ -378,10 +372,6 @@ export function BoardLayout() {
           </Box>
         </div>
         <div>
-          <Box sx={{ m: 2 }} display="flex" justifyContent="center">
-            <AddValue />
-          </Box>
-
           <Box
             sx={{ m: 10 }}
             // display="flex"
@@ -427,7 +417,7 @@ export function BoardLayout() {
             {/* saving Sketch and Recording on Firebase  */}
             <StopRecordBoardButton
               uploadSketch={(e) => onUploadCanvas(e)}
-              // saveCanvas={() => saveCanvas()}
+              // saveSketchLocal={() => saveSketchLocal()}
             />
           </Box>
         </div>
@@ -444,22 +434,10 @@ export function BoardLayout() {
           hideGrid={true}
           enablePanAndZoom={true}
           style={{ border: "1px solid #000" }}
-          ref={canvasRef}
+          ref={canvasRef }
           loadTimeOffset={10}
         />
       </div>
     </Container>
   );
 }
-// export const DisplayAllProps = (props) => (
-//   <table>
-//     <tbody>
-//       {Array.from(Object.entries(props)).map(([key, value]) => (
-//         <tr key={key + Math.random()}>
-//           <td>{key}</td>
-//           <td>{value}</td>
-//         </tr>
-//       ))}
-//     </tbody>
-//   </table>
-// );

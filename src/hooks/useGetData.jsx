@@ -8,6 +8,7 @@ export const useGetData = () => {
 
   React.useEffect(() => {
     db.collection("Sketching")
+      .orderBy("createdAt")
       .get()
       .then((querySnapshot) => {
         let arr = [];
@@ -17,7 +18,7 @@ export const useGetData = () => {
         setUsersData(arr);
       });
   }, [db]);
-    console.log(usersData);
+    // console.log(usersData);
     return [usersData];
 }
     
