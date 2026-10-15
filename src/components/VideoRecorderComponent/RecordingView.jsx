@@ -1,6 +1,5 @@
 import React,  {useRef, useEffect, useState} from "react";
 // import VideoRecorder from "react-video-recorder";
-import { app } from "../../services/base";
 
 import {
   Grid,
@@ -8,7 +7,6 @@ import {
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import RecordRTC from 'recordrtc';
-const db = app.firestore();
 
 
 const useStyles = makeStyles((theme) => ({
@@ -26,7 +24,6 @@ export function RecordingView() {
 
 
 const videoRef = useRef(null);
-const [videos, setSaveVideos] = useState([]);
 
 let recorder;
 
@@ -53,7 +50,7 @@ const startRecord = () => {
   };
 
   const stopRecordingCallback = () => {
-      
+
     videoRef.current.muted = false;
     videoRef.current.volume = 1;
     videoRef.current.srcObject = null;
@@ -83,14 +80,7 @@ const startRecord = () => {
       try {
         const stream = await navigator.mediaDevices.getUserMedia({audio: true, video: true});
         videoRef.current.srcObject = stream;
-        const unmount = db.collection("Videos").onSnapshot((snapshot) => {
-          const tempVideos = [];
-          snapshot.forEach((doc) => {
-          tempVideos.push({ ...doc.data(), id: doc.id });
-          });
-            setSaveVideos(tempVideos);
-          });    
-        return unmount;
+
       } catch (err) {
         console.log(err);
       }

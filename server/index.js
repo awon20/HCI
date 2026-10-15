@@ -16,4 +16,5 @@ function onConnection(socket) {
 }
 //  decide on a port to listen on.
 const port = 8081;
-server.listen(port, () => console.log(`server is running on port ${port}`));
+// Development demo without authentication: accept local connections only.
+server.listen(port, "127.0.0.1", () => console.log(`server is running locally on port ${port}`));

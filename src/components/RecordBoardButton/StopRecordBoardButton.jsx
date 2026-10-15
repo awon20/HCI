@@ -71,8 +71,8 @@ export function StopRecordBoardButton(props) {
           variant="contained"
           color="primary"
           disableRipple
-          onClick={(e) => 
-            { props.uploadSketch(e); handleClickOpen(); } 
+          onClick={(e) =>
+            { props.uploadSketch(e); handleClickOpen(); }
           }
         >
           <Typography
@@ -95,7 +95,7 @@ export function StopRecordBoardButton(props) {
         keepMounted
       >
         <DialogTitle id="alert-dialog-title">
-          {"Ihre Aufzeichnung wird gespeichert!"}
+          {"Lokaler Download gestartet. Firebase ist deaktiviert."}
         </DialogTitle>
       </Dialog>
     </div>
