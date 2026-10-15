@@ -27,9 +27,6 @@ import BottomNavigation from "@material-ui/core/BottomNavigation";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
 import TextField from "@material-ui/core/TextField";
 
-//-------------- get firebase-configuration --------------------
-import { app } from "../../services/base"
-import firebase from "firebase";
 const drawerWidth = 690;
 
 const useStyles = makeStyles((theme) => ({
@@ -116,9 +113,7 @@ export function BoardLayout() {
   const [urlSketch, setUrlSketch] = useState("");
   const [sketchesTime, setSketchesTime] = useState("");
 
-  //-------------- get firebase-storage and firestore-API --------------------
-  const db = app.firestore();
-  const storage = app.storage();
+
 
   const handleClear = () => {
     canvasRef.current.clear();
@@ -133,137 +128,30 @@ export function BoardLayout() {
   //   alert("DataURL written to console");
   // };
 
-  // ----------------------- setusername on firestore  ---------------------------
+  // ----------------------- set local username  ---------------------------
   const getUserName = (e) => {
     setUsername(e.target.value);
   };
 
-  // ----------------------- setsketchname on firestore  ---------------------------
+  // ----------------------- set local sketch name  ---------------------------
   const getSketchName = (e) => {
     setSketchName(e.target.value);
   };
 
-  // -----------------------upload images as svg to the storage ---------------------------
-  const onUploadCanvas = async (e) => {
+  // -----------------------download the sketch locally ---------------------------
+  // Saving is local only; this legacy app no longer connects to Firebase.
+  const onUploadCanvas = (e) => {
     e.preventDefault();
-    setUsernameError(false);
-    setSketchNameError(false);
-    setSketchesTime();
-
-    if (username === "") {
-      setUsernameError(true);
-    }
-    if (sketchName === "") {
-      setSketchNameError(true);
-    }
-    if (!username && !sketchName) {
-      return;
-    }
-    // Sending File to Firebase Storage
     const image = canvasRef.current.getDataURL();
-    const blob = await (await fetch(image)).blob();
-    const storageRef = storage.ref();
-    // const sketchesRef = storageRef.child("sketching/" + sketchName);
-    // Create the file metadata
-    var metadata = {
-      contentType: "image/png",
-    };
-    // Upload file and metadata to the object 'sketching'
-    var uploadTask = storageRef
-      .child("sketching/" + sketchName)
-      .put(blob, metadata);
-    // Listen for state changes, errors, and completion of the upload.
-    uploadTask.on(
-      firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
-      (snapshot) => {
-        // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-        var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        console.log("Sketch Upload is " + progress + "% done");
-        switch (snapshot.state) {
-          case firebase.storage.TaskState.PAUSED: // or 'paused'
-            console.log(" Sketch Upload is paused");
-            break;
-          case firebase.storage.TaskState.RUNNING: // or 'running'
-            console.log("Sketch Upload is running");
-            break;
-          default:
-            console.log("Sketch Upload is now running");
-        }
-      },
-      (error) => {
-        // A full list of error codes is available at
-        // https://firebase.google.com/docs/storage/web/handle-errors
-        switch (error.code) {
-          case "storage/unauthorized":
-            // User doesn't have permission to access the object
-            break;
-          case "storage/canceled":
-            // User canceled the upload
-            break;
-          case "storage/unknown":
-            // Unknown error occurred, inspect error.serverResponse
-            break;
-          default:
-            console.log("Sketch Upload is no running");
-        }
-      },
-      () => {
-        // Upload completed successfully, now we can get the download URL
-        uploadTask.snapshot.ref.getDownloadURL().then(
-          (downloadURL) => {
-            db.collection("Sketching")
-              .doc(username, sketchName, urlSketch, sketchesTime)
-              .set({
-                username: username,
-                sketchName: sketchName,
-                urlSketch: downloadURL,
-                sketchesTime: firebase.firestore.FieldValue.serverTimestamp(),
-              })
-              .then(function () {
-                console.log("UsersData successfully written!");
-              })
-              .catch(function (error) {
-                console.error("Error writing UsersData: ", error);
-              });
-              setUrlSketch(downloadURL);
-            // console.log(downloadURL);
-          },
-          (error) => {
-            // failed to get download URL
-            console.log(error);
-          }
-        );
-      }
-    );
-    // if (username && sketchName) {
-    //   fetch("http://localhost:8000/Sketching", {
-    //     method: "POST",
-    //     headers: { "Content-type": "application/json" },
-    //     body: JSON.stringify({ username, sketchName, urlSketch }),
-    //   });
-    // }
+    const link = document.createElement("a");
+    link.href = image;
+    link.download = "sketch.png";
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    setUrlSketch(image);
+    setSketchesTime(new Date().toISOString());
   };
-  // const onSketchesCreate = (e) => {
-  //   if (!username && sketchName) {
-  //     return;
-  //   }
-  //   db.collection("Sketching")
-  //     .doc(username, sketchName, urlSketch, sketchesTime)
-  //     .set({
-  //       username: username,
-  //       sketchName: sketchName,
-  //       urlSketch: "",
-  //       sketchesTime: firebase.firestore.FieldValue.serverTimestamp(),
-  //     })
-  //     .then(function () {
-  //       console.log("UsersData successfully written!");
-  //     })
-  //     .catch(function (error) {
-  //       console.error("Error writing UsersData: ", error);
-  //     });
-  //     e.preventDefault();
-  //   };
-
   return (
     <Container size="sm">
       <MUIDrawer

@@ -45,3 +45,12 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.toptal.com/developers/gitignore/api/windows,react
+# Local dependencies and credentials
+node_modules/
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+npm-debug.log*
+build/

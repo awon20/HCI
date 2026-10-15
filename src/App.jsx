@@ -58,6 +58,7 @@ function App() {
     <div>
       <ThemeProvider theme={theme}>
         <CssBaseline />
+        <p role="status">Firebase access is disabled. Saving a sketch downloads it locally; the cloud archive is retired.</p>
         <Switch>
           <Route exact path="/sketchbox-pages">
             <WelcomePage onClick={() => setIsLoading(true)} />
